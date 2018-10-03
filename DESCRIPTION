@@ -15,3 +15,7 @@ Authors@R:
       person(given = "rOpenSci",
              role = "fnd",
              comment = "https://ropensci.org/"))
+Imports: 
+    git2r,
+    fs
+RoxygenNote: 6.1.0.9000
