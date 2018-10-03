@@ -4,8 +4,7 @@ title: "Your cool title"
 date: yyyy-mm-dd
 authors:
   - name: 
-categories:
-  - blog
+categories: blog
 topicid:  
 tags:
 - tag1

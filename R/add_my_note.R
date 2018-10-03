@@ -25,12 +25,12 @@
 #' slug <- "orcid"
 #' date <- "2018-10-08"
 #' roweb2_clone_path <- "C:/Users/Maelle/Documents/ropensci/roweb2"
-#' add_my_note(post_dir = post_dir,
+#' add_my_content(post_dir = post_dir,
 #'             roweb2_clone_path = roweb2_clone_path,
 #'             slug = slug, date = date,
 #'            message = "work on my post")
 #' }
-add_my_note <- function(post_dir, roweb2_clone_path,
+add_my_content <- function(post_dir, roweb2_clone_path,
                         slug, date,
                         message = "work on my post",
                         push = FALSE){
@@ -46,7 +46,11 @@ add_my_note <- function(post_dir, roweb2_clone_path,
   git2r::checkout(r, branch = slug, create = TRUE)
 
   # copy post and git add it
-  post_path <- file.path(roweb2_clone_path, "content", "technotes",
+  lines <- readLines(file.path(post_dir, paste0(post, ".md")))
+  category <- trimws(gsub("categories\\:", "",
+                   lines[grepl("categories\\:", lines)][1]))
+
+  post_path <- file.path(roweb2_clone_path, "content", category,
                          paste0(post, ".md"))
   file.copy(file.path(post_dir, paste0(post, ".md")),
             post_path, overwrite = TRUE)
