@@ -1,0 +1,28 @@
+---
+slug: "the-slug-can-be-several-words"
+title: "Your cool title"
+date: yyyy-mm-dd
+authors:
+  - name: 
+categories:
+  - blog
+topicid:  
+tags:
+- tag1
+- tag2
+output: 
+  md_document:
+    variant: markdown_github
+    preserve_yaml: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      cache = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+# Section
+
+## Subsection
