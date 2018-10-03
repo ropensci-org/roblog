@@ -1,0 +1,17 @@
+Package: roblog
+Type: Package
+Title: Provides Helpers for roweb2 Blogging
+Version: 0.1.0
+Description: It provides templates for roweb2 blogging and help for a GitHub forking workflow.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Authors@R: 
+    c(person(given = "Maëlle",
+             family = "Salmon",
+             role = c("aut", "cre"),
+             email = "maelle.salmon@yahoo.se",
+             comment = c(ORCID = "0000-0002-2815-0399")),
+      person(given = "rOpenSci",
+             role = "fnd",
+             comment = "https://ropensci.org/"))
