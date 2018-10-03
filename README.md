@@ -7,7 +7,7 @@ The goal of roblog is to provide helpers for authors of blog posts and tech note
 Not especially useful yet.
 
 ``` r
-remotes::install_githbub("ropenscilabs/roblog")
+remotes::install_github("ropenscilabs/roblog")
 ```
 
 # Current functionality
