@@ -22,7 +22,7 @@ Based on my current workflow in which I have a separate folder/RStudio project p
 
 * You need a local clone of ropensci/roweb2 living at `roweb2_clone_path` on your computer.
 
-* You need to have a blog post or tech note living at `post_dir` (anywhere but not in `roweb2_clone_path`). It should be named "slug_yyyy_mm_dd.md". Ideally, it'll have been generated from one of the R Markdown templates mentioned in the previous subsection. If you don't need to knit, just save the templat as .md directly!
+* You need to have a blog post or tech note living at `post_dir` (anywhere but not in `roweb2_clone_path`). It should be named "slug-yyyy-mm-dd.md". Ideally, it'll have been generated from one of the R Markdown templates mentioned in the previous subsection. If you don't need to knit, just save the templat as .md directly!
 
 * At the moment the images in the blog post should live in `post_dir/yyyy-mm-dd_files/figures_markdown-github` which is where `knitr` automatically puts figures, but later I might other possible folders. 
 
@@ -35,10 +35,10 @@ post_dir <- "C:/Users/Maelle/Documents/ropensci/orcid_note"
 slug <- "orcid"
 date <- "2018-10-08"
 roweb2_clone_path <- "C:/Users/Maelle/Documents/ropensci/roweb2"
-add_my_note(post_dir = post_dir,
+add_my_content(post_dir = post_dir,
             roweb2_clone_path = roweb2_clone_path,
             slug = slug, date = date,
-           message = "work on my post", push = FALSE)
+           message = "work on my post")
 ```
 
 At the moment it can't push for you unless you have your `git2r`&co setup worked out. So you'll still need to git push from `roweb2_clone_path`. 
