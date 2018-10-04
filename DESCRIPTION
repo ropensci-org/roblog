@@ -14,7 +14,11 @@ Authors@R:
              comment = c(ORCID = "0000-0002-2815-0399")),
       person(given = "rOpenSci",
              role = "fnd",
-             comment = "https://ropensci.org/"))
+             comment = "https://ropensci.org/"),
+      person(given = "Amanda",
+             family = "Dobbyn",
+             role = "ctb",
+             email = "amanda.e.dobbyn@gmail.com"))
 Imports: 
     git2r,
     fs
