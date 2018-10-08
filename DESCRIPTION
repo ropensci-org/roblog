@@ -21,5 +21,6 @@ Authors@R:
              email = "amanda.e.dobbyn@gmail.com"))
 Imports: 
     git2r,
-    fs
+    fs,
+    hrbrthemes
 RoxygenNote: 6.1.0.9000
