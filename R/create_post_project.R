@@ -39,11 +39,7 @@ create_post_project <- function(dir = tempdir(),
     stop("category has to be either 'blog' or 'technotes'")
   }
 
-  if(type == "Rmd"){
-    post_path <- file.path(dir, slug, glue::glue("{slug}-{date}.Rmd"))
-  }else{
-    post_path <- file.path(dir, slug, glue::glue("{slug}-{date}.md"))
-  }
+  post_path <- file.path(dir, slug, glue::glue("{slug}-{date}.Rmd"))
 
 
   file.copy(system.file("rmarkdown", "templates",
@@ -57,9 +53,10 @@ create_post_project <- function(dir = tempdir(),
 
 
   writeLines(post_template, post_path)
+  rmarkdown::render(post_path)
 
-  if(type == "Rmd"){
-    rmarkdown::render(post_path)
+  if(type != "Rmd"){
+    file.remove(post_path)
   }
 
   readme_template <- readLines(system.file("templates/post_readme.md",
