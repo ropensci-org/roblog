@@ -16,6 +16,29 @@ remotes::install_github("ropenscilabs/roblog")
 
 Once the package is installed if using RStudio, when choosing to create a new R Markdown file from template, you'll be able to choose rOpenSci Tech Note or rOpenSci Blog Post as template.
 
+## Create a post project
+
+You can create an RStudio project using `create_post_project`. It'll contain your post source (Rmd or md), based on the template corresponding to the category ("blog" or "technotes"), a slug, and a publication date (you could change that later).
+
+Create a post from an Rmd for the blog:
+
+```r
+create_post_project(tempdir(),
+                    "test", "2018-10-15",
+                    type = "Rmd",
+                    category = "blog")
+```
+
+Create a tech note from a Markdown document:
+                    
+```r
+create_post_project(tempdir(),
+                    "test2", "2018-10-15",
+                    type = "md",
+                    category = "technotes")
+
+```
+
 ## Fork helper
 
 Based on my current workflow in which I have a separate folder/RStudio project per blog post, tech note or blog post series. 
