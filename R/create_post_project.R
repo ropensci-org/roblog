@@ -28,7 +28,7 @@ create_post_project <- function(dir = tempdir(),
 
   file.copy(system.file(file.path("templates",
                                   "post.Rproj"),
-                        package = "rodev"),
+                        package = "roblog"),
             file.path(dir, slug, paste0(slug,".Rproj")))
 
   if(!type %in% c("Rmd", "md")){
@@ -75,6 +75,7 @@ create_post_project <- function(dir = tempdir(),
   writeLines(readme_template, file.path(dir, slug, "README.md"))
 
   if(rstudioapi::isAvailable()){
+    message(paste("Opening"), file.path(dir, slug))
     rstudioapi::openProject(file.path(dir, slug), newSession = TRUE)
   }else{
     message(paste("Project files created in"),
