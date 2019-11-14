@@ -5,7 +5,7 @@ The goal of roblog is to provide helpers for authors of blog posts and tech note
 ## Installation
 
 ``` r
-remotes::install_github("ropenscilabs/roblog")
+install.packages("roblog", repos = "https://dev.ropensci.org")
 ```
 
 # Current functionality
