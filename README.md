@@ -47,7 +47,7 @@ usethis::create_from_github("ropensci/roweb2")
 * Create a branch
 
 ```r
-usethispr_init(branch = "mypost")
+usethis::pr_init(branch = "mypost")
 ```
 * Work locally (adding your post)
 
