@@ -36,7 +36,7 @@ Either
 
 ## How to prepare your pull request
 
-You'll need to fork https://github.com/ropensci/roweb2 and create a branch. You can either use your usual workflow for that, or use [`usethis` helpers](https://usethis.r-lib.org/reference/pr_init.html#for-contributors), see below.
+You'll need to fork https://github.com/ropensci/roweb2 and create a branch. You can either use your usual workflow for that, or use [`usethis` helpers](https://usethis.r-lib.org/articles/articles/pr-functions.html), see below.
 
 * Create the fork and check it out locally:
 
