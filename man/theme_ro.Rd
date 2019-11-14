@@ -4,8 +4,7 @@
 \alias{theme_ro}
 \title{rOpenSci ggplot2 theme}
 \usage{
-theme_ro(base_size = 12, axis_title_size = 12, axis_text_size = 12,
-  ...)
+theme_ro(base_size = 12, axis_title_size = 12, axis_text_size = 12, ...)
 }
 \arguments{
 \item{base_size}{size parameter}
@@ -13,8 +12,6 @@ theme_ro(base_size = 12, axis_title_size = 12, axis_text_size = 12,
 \item{axis_title_size}{size parameter}
 
 \item{...}{other parameters passed to \code{hrbrthemes::theme_ipsum}}
-
-\item{axis_title_size}{size parameter}
 }
 \value{
 ggplot2 theme

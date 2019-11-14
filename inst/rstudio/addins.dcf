@@ -1,0 +1,9 @@
+Name: rOpenSci R Markdown Post
+Description: Create a new rOpenSci R Markdown Blog Post
+Binding: ro_blog_post_rmd
+Interactive: false
+
+Name: rOpenSci Markdown Post
+Description: Create a new rOpenSci Markdown Blog Post
+Binding: ro_blog_post_md
+Interactive: false

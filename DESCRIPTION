@@ -22,5 +22,7 @@ Authors@R:
 Imports: 
     git2r,
     fs,
-    hrbrthemes
-RoxygenNote: 6.1.0.9000
+    hrbrthemes,
+    rstudioapi,
+    glue
+RoxygenNote: 6.1.99.9001
