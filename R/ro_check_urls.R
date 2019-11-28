@@ -21,8 +21,9 @@ ro_check_urls <- function(path) {
 
   urls <- post_xml %>%
     xml2::xml_find_all("//link") %>%
-    xml2::xml_attr("destination") %>%
-    .[grepl("http", .)]
+    xml2::xml_attr("destination")
+
+  urls <- urls[grepl("http", urls)]
 
   df <- tibble::tibble(url = urls,
                  ok = purrr::map_lgl(urls, crul::ok,
