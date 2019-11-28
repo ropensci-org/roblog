@@ -19,6 +19,7 @@ ro_blog_post_rmd <- function() {
                           type = "rmarkdown")
 }
 #' @rdname blog-posts
+#' @export
 ro_blog_post_md <- function() {
   rstudioapi::documentNew(glue::glue_collapse(
     readLines(

@@ -25,4 +25,4 @@ Imports:
     hrbrthemes,
     rstudioapi,
     glue
-RoxygenNote: 6.1.99.9001
+RoxygenNote: 7.0.1
