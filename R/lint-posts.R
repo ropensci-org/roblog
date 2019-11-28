@@ -25,11 +25,7 @@ ro_lint_md <- function(path) {
     stop(glue::glue("The file {path} could not be read."))
   }
 
-  text  %>%
-    glue::glue_collapse(sep = "\n") %>%
-    commonmark::markdown_xml(hardbreaks = TRUE) %>%
-    xml2::read_xml() %>%
-    xml2::xml_ns_strip() -> post_xml
+  post_xml <- get_xml(text)
 
   issues <- c(rolint_alt_shortcode(text),
               rolint_alt_xml(post_xml),

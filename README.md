@@ -41,11 +41,15 @@ Either
 
 ## Lint
 
-`ro_lint_md()` to be run on the path to your blog post (rendered, not
-the Rmd) to identify some potential problems and enforce: the use of
-complete alternative descriptions for image, of relative links to
+Functions to be run on the path to your blog post (rendered, not the
+Rmd)
+
+`ro_lint_md()` should identify some potential problems and enforce: the
+use of complete alternative descriptions for image, of relative links to
 rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for
 rOpenSci name.
+
+`ro_check_urls()` will identify possibly broken URLs.
 
 ``` r
 path1 <- system.file(file.path("examples", "bad-no-alt.md"),
@@ -65,24 +69,9 @@ roblog::ro_lint_md(path1)
 #>        should be {{< tweet "1200040510540386304">}},
 #> {{< tweet "969442252610191361">}}
 #> 
-#> A bit more work is needed on this amazing post draft!
-
-path2 <- system.file(file.path("examples", "bad-no-alt2.md"),
-                                         package = "roblog")
-roblog::ro_lint_md(path2)
-#> * Alternative image description missing or too short for:
-#>  /img/blog-images/2018-05-03-onboarding-is-work/unnamed-chunk-2-1.png,
-#> /img/blog-images/2018-05-03-onboarding-is-work/unnamed-chunk-6-1.png,
-#> /img/blog-images/2018-05-03-onboarding-is-work/scatterplot-size-vs-reviewing-time-1.png
-#> 
-#> * Please replace absolute links with relative links: https://ropensci.org/blog should become /blog.
-#> 
-#> A bit more work is needed on this luminous post draft!
-
-path3 <- system.file(file.path("examples", "allgood.md"),
-                                         package = "roblog")
-roblog::ro_lint_md(path3)
-#> All good, ole! :-)
+#> A bit more work is needed on this cat's pajamas post draft!
+roblog::ro_check_urls(path1)
+#> Possibly broken URLs: https://masalmon.eu/40004, https://masalmon.eu/400040.
 ```
 
 ## How to prepare your pull request

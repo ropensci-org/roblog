@@ -51,21 +51,17 @@ Either
 
 ## Lint
 
-`ro_lint_md()` to be run on the path to your blog post (rendered, not the Rmd) to identify some potential problems and enforce: the use of complete alternative descriptions for image, of relative links to rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for rOpenSci name.
+Functions to be run on the path to your blog post (rendered, not the Rmd) 
 
+`ro_lint_md()` should identify some potential problems and enforce: the use of complete alternative descriptions for image, of relative links to rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for rOpenSci name.
+
+`ro_check_urls()` will identify possibly broken URLs.
 
 ```{r lint}
 path1 <- system.file(file.path("examples", "bad-no-alt.md"),
                                          package = "roblog")
 roblog::ro_lint_md(path1)
-
-path2 <- system.file(file.path("examples", "bad-no-alt2.md"),
-                                         package = "roblog")
-roblog::ro_lint_md(path2)
-
-path3 <- system.file(file.path("examples", "allgood.md"),
-                                         package = "roblog")
-roblog::ro_lint_md(path3)
+roblog::ro_check_urls(path1)
 ```
 
 ## How to prepare your pull request
