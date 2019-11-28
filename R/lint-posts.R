@@ -33,7 +33,7 @@ ro_lint_md <- function(path) {
     xml2::xml_ns_strip() -> post_xml
 
   issues <- c(rolint_alt_shortcode(text),
-              rolint_ropensci(text),
+              rolint_ropensci(post_xml),
               rolint_alt_xml(post_xml),
               rolint_tweet(post_xml),
               rolint_absolute_links(post_xml))
@@ -50,11 +50,13 @@ ro_lint_md <- function(path) {
 
 }
 
-rolint_ropensci <- function(text){
+rolint_ropensci <- function(post_xml){
+  text <- xml2::xml_text(xml2::xml_children(post_xml))
   text <- glue::glue_collapse(text, sep = " ")
   problems <- trimws(
     unlist(regmatches(text, gregexpr("ropensci[ \\.\\,\\;\\!\\?\\-\\:]",
                                                text, ignore.case = TRUE))))
+  problems <- sub("\\.", "", problems)
   problems <- problems[problems != "rOpenSci"]
 
   if (length(problems) == 0) {
@@ -76,6 +78,10 @@ rolint_alt_shortcode <- function(text){
   sc %>%
     dplyr::filter(.data$name == "figure") %>%
     dplyr::group_by(.data$shortcode) -> df
+
+  if(nrow(df) == 0) {
+    return(NULL)
+  }
 
   df %>%
     dplyr::filter(.data$param_name == "alt") %>%
@@ -186,10 +192,10 @@ rolint_absolute_links <- function(post_xml) {
     xml2::xml_find_all("//link") %>%
     xml2::xml_attr("destination") -> links
 
-  absolute_links <- links[grepl("ropensci\\.org", links)]
+  absolute_links <- links[grepl("//(www.)?ropensci\\.org\\/", links)]
 
   if (length(absolute_links)) {
-    relative_links <- gsub(".*ropensci\\.org/", "/", absolute_links)
+    relative_links <- gsub(".*ropensci\\.org\\/", "/", absolute_links)
 
     absolute_links <- glue::glue_collapse(absolute_links, sep = ", ")
     relative_links <- glue::glue_collapse(relative_links, sep = ", ")
