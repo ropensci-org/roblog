@@ -34,14 +34,18 @@ ro_lint_md <- function(path) {
 
   if (length(issues) > 0) {
     cat(paste("*", issues), sep = "\n\n")
+  } else {
+    cat("All good! :-)")
   }
 
 }
 
 rolint_ropensci <- function(text){
   text <- glue::glue_collapse(text, sep = " ")
-  problems <- unlist(regmatches(text, gregexpr("ropensci",
-                                               text, ignore.case = TRUE)))
+  problems <- trimws(
+    unlist(regmatches(text, gregexpr("ropensci[ \\.\\,\\;\\!\\?\\-\\:]",
+                                               text, ignore.case = TRUE))))
+  problems <- problems[problems != "rOpenSci"]
 
   if (length(problems) == 0) {
     return(NULL)
@@ -53,7 +57,13 @@ rolint_ropensci <- function(text){
 
 rolint_alt <- function(text){
   text %>%
-    rectangle_shortcodes() %>%
+    rectangle_shortcodes() -> sc
+
+  if (!"shortcode" %in% names(sc)) {
+    return(NULL)
+  }
+
+  sc %>%
     dplyr::filter(name == "figure") %>%
     dplyr::group_by(shortcode) -> df
 
