@@ -19,12 +19,11 @@ shortcode_pattern_end <- function() {
 #'                     package = "roblog")
 #' }
 ro_lint_md <- function(path) {
-  if (!file.exists(path)) {
-    stop(glue::glue("The file {path} could not be found."))
-  }
+  text <- try(readLines(path), silent = TRUE)
 
-  path %>%
-    readLines() -> text
+  if (inherits(text, "try-error")) {
+    stop(glue::glue("The file {path} could not be read."))
+  }
 
   text  %>%
     glue::glue_collapse(sep = "\n") %>%
