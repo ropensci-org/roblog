@@ -33,8 +33,8 @@ ro_lint_md <- function(path) {
     xml2::xml_ns_strip() -> post_xml
 
   issues <- c(rolint_alt_shortcode(text),
-              rolint_ropensci(post_xml),
               rolint_alt_xml(post_xml),
+              rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
               rolint_absolute_links(post_xml))
 

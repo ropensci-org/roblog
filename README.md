@@ -10,6 +10,10 @@ install.packages("roblog", repos = "https://dev.ropensci.org")
 
 ## Current functionality
 
+* (R) Markdown templates (see further)
+
+* `ro_lint_md()` to be run on the path to your blog post (rendered, not the Rmd) to identify some potential problems and enforce: the use of complete alternative descriptions for image, of relative links to rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for rOpenSci name.
+
 ## (R) Markdown templates
 
 If you want to execute code, use the R Markdown template. If not, use a Markdown template.
