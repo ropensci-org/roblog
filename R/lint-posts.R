@@ -34,7 +34,8 @@ ro_lint_md <- function(path) {
 
   issues <- c(rolint_alt_shortcode(text),
               rolint_ropensci(text),
-              rolint_alt_xml(post_xml))
+              rolint_alt_xml(post_xml),
+              rolint_tweet(post_xml))
 
   if (length(issues) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
@@ -89,7 +90,7 @@ rolint_alt_shortcode <- function(text){
 
 
   if (nrow(df3)) {
-    glue::glue("Alternative image description missing or too short for: {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+    glue::glue("Alternative image description missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
   } else {
     NULL
   }
@@ -157,7 +158,23 @@ rolint_alt_xml <- function(post_xml) {
   if(length(noalts) == 0) {
     return(NULL)
   } else {
-    glue::glue("Alternative image description missing or too short for: {glue::glue_collapse(noalts, sep = ',\n')}")
+    glue::glue("Alternative image description missing or too short for:\n {glue::glue_collapse(noalts, sep = ',\n')}")
   }
 
+}
+
+rolint_tweet <- function(post_xml) {
+  nodes <- xml2::xml_children(post_xml)
+  prob <- xml2::xml_text(
+    nodes[grepl('<blockquote class="twitter-tweet">', xml2::xml_text(nodes))])
+  status <- stringr::str_extract(prob, "status\\/[0-9]*") %>%
+    stringr::str_remove("status\\/")
+  status <- paste0('{{< tweet "', status, '">}}')
+  if(length(prob) > 0) {
+    return(glue::glue(
+      "Use Hugo shortcodes to embed tweets, not Twitter html:\n {glue::glue_collapse(prob, sep = ',\n')}
+       should be {glue::glue_collapse(status, sep = ',\n')}"))
+  } else {
+    return(NULL)
+  }
 }

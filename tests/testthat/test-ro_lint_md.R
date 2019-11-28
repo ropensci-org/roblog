@@ -19,3 +19,9 @@ test_that("ro_lint_md find alt issues", {
   testthat::expect_message(ro_lint_md(path), "Alternative")
 })
 
+test_that("ro_lint_md find embedded tweets issues", {
+  path <- system.file(file.path("examples", "bad-no-alt.md"),
+                      package = "roblog")
+  testthat::expect_message(ro_lint_md(path), "not Twitter html")
+})
+
