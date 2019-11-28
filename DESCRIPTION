@@ -24,5 +24,8 @@ Imports:
     fs,
     hrbrthemes,
     rstudioapi,
-    glue
+    glue,
+    commonmark,
+    xml2,
+    magrittr
 RoxygenNote: 7.0.1
