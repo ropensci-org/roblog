@@ -114,8 +114,7 @@ y-axis are the number of lines *deleted* in one commit.
 plot_commits("opencage", commits = commits)
 ```
 
-![commits plot of the opencage
-package](/img/blog-images/2018-05-03-onboarding-is-work/unnamed-chunk-2-1.png)
+![commits plot](/img/blog-images/2018-05-03-onboarding-is-work/unnamed-chunk-2-1.png)
 
 ``` r
 plot_commits("charlatan", commits = commits)

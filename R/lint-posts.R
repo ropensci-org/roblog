@@ -1,3 +1,5 @@
+#' @importFrom rlang .data
+
 shortcode_pattern_start <- function() {
   "\\{\\{[<\\%]"
 }
@@ -27,15 +29,21 @@ ro_lint_md <- function(path) {
   text  %>%
     glue::glue_collapse(sep = "\n") %>%
     commonmark::markdown_xml(hardbreaks = TRUE) %>%
-    xml2::read_xml() -> post_xml
+    xml2::read_xml() %>%
+    xml2::xml_ns_strip() -> post_xml
 
-  issues <- c(rolint_alt(text),
-              rolint_ropensci(text))
+  issues <- c(rolint_alt_shortcode(text),
+              rolint_ropensci(text),
+              rolint_alt_xml(post_xml))
 
   if (length(issues) > 0) {
-    cat(paste("*", issues), sep = "\n\n")
+    encourage <- praise::praise("this ${adjective} post draft")
+    message(glue::glue_collapse(
+      c(paste("*", issues),
+        glue::glue("A bit more work is needed on {encourage}!")), sep = "\n\n"))
   } else {
-    cat("All good! :-)")
+    good <- praise::praise("${exclamation}")
+    message(glue::glue("All good, {good}! :-)"))
   }
 
 }
@@ -55,7 +63,7 @@ rolint_ropensci <- function(text){
 }
 
 
-rolint_alt <- function(text){
+rolint_alt_shortcode <- function(text){
   text %>%
     rectangle_shortcodes() -> sc
 
@@ -64,18 +72,18 @@ rolint_alt <- function(text){
   }
 
   sc %>%
-    dplyr::filter(name == "figure") %>%
-    dplyr::group_by(shortcode) -> df
+    dplyr::filter(.data$name == "figure") %>%
+    dplyr::group_by(.data$shortcode) -> df
 
   df %>%
-    dplyr::filter(param_name == "alt") %>%
+    dplyr::filter(.data$param_name == "alt") %>%
     # https://stackoverflow.com/questions/8920145/count-the-number-of-all-words-in-a-string
-    dplyr::mutate(param_value = gsub('\"', "", param_value),
-                  alt_length = lengths(gregexpr("\\W+", param_value)) + 1) %>%
-    dplyr::filter(alt_length < 3) -> df1
+    dplyr::mutate(param_value = gsub('\"', "", .data$param_value),
+                  alt_length = lengths(gregexpr("\\W+", .data$param_value)) + 1) %>%
+    dplyr::filter(.data$alt_length < 3) -> df1
 
   df %>%
-    dplyr::filter(!any(param_name == "alt")) -> df2
+    dplyr::filter(!any(.data$param_name == "alt")) -> df2
 
   df3 <- rbind(df1, df2)
 
@@ -138,4 +146,18 @@ get_option <- function(param_name, params) {
 
   tibble::tibble(param_name = trimws(gsub("\\=", "", param_name)),
                  param_value = param_value)
+}
+
+rolint_alt_xml <- function(post_xml) {
+
+  imgs <- xml2::xml_find_all(post_xml, "//image")
+  alt_length <- lengths(gregexpr("\\W+", xml2::xml_text(imgs)))
+  noalts <- xml2::xml_attr(imgs, "destination")[alt_length < 3]
+
+  if(length(noalts) == 0) {
+    return(NULL)
+  } else {
+    glue::glue("Alternative image description missing or too short for: {glue::glue_collapse(noalts, sep = ',\n')}")
+  }
+
 }
