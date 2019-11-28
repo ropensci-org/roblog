@@ -333,7 +333,7 @@ the process of trying to maximize automation of all than can be
 automated in order to reduce and simplify work for everyone involved.
 This way, humans can focus on what they’re best at. Our current
 automation efforts include two packages in development: one for package
-authors, [`rodev`](https://github.com/ropenscilabs/rodev), by rOpenSci
+authors, [`rodev`](https://ropensci.org/blog), by rOpenSci
 staff, and one for package reviewers,
 [`pkgreviewr`](https://github.com/ropenscilabs/pkgreviewr), by community
 member (and guest editor!) [Anna

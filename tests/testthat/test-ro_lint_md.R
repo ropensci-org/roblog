@@ -25,3 +25,9 @@ test_that("ro_lint_md find embedded tweets issues", {
   testthat::expect_message(ro_lint_md(path), "not Twitter html")
 })
 
+test_that("ro_lint_md finds absolute links", {
+  path <- system.file(file.path("examples", "bad-no-alt2.md"),
+                      package = "roblog")
+  testthat::expect_message(ro_lint_md(path), "relative links")
+})
+

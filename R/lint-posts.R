@@ -35,7 +35,8 @@ ro_lint_md <- function(path) {
   issues <- c(rolint_alt_shortcode(text),
               rolint_ropensci(text),
               rolint_alt_xml(post_xml),
-              rolint_tweet(post_xml))
+              rolint_tweet(post_xml),
+              rolint_absolute_links(post_xml))
 
   if (length(issues) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
@@ -177,4 +178,25 @@ rolint_tweet <- function(post_xml) {
   } else {
     return(NULL)
   }
+}
+
+
+rolint_absolute_links <- function(post_xml) {
+  post_xml %>%
+    xml2::xml_find_all("//link") %>%
+    xml2::xml_attr("destination") -> links
+
+  absolute_links <- links[grepl("ropensci\\.org", links)]
+
+  if (length(absolute_links)) {
+    relative_links <- gsub(".*ropensci\\.org/", "/", absolute_links)
+
+    absolute_links <- glue::glue_collapse(absolute_links, sep = ", ")
+    relative_links <- glue::glue_collapse(relative_links, sep = ", ")
+
+    glue::glue("Please replace absolute links with relative links: {absolute_links} should become {relative_links}.")
+  } else {
+    return(NULL)
+  }
+
 }
