@@ -9,18 +9,8 @@ tech notes on rOpenSci blog.
 ## Installation
 
 ``` r
-install.packages("roblog", repos = "https://dev.ropensci.org")
+remotes::install_github("ropenscilabs/roblog")
 ```
-
-## Current functionality
-
-  - ( R ) Markdown templates (see further)
-
-  - `ro_lint_md()` to be run on the path to your blog post (rendered,
-    not the Rmd) to identify some potential problems and enforce: the
-    use of complete alternative descriptions for image, of relative
-    links to rOpenSci website, of Hugo shortcodes for tweets, of lower
-    camelCase for rOpenSci name.
 
 ## (R) Markdown templates
 
@@ -51,6 +41,12 @@ Either
 
 ## Lint
 
+`ro_lint_md()` to be run on the path to your blog post (rendered, not
+the Rmd) to identify some potential problems and enforce: the use of
+complete alternative descriptions for image, of relative links to
+rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for
+rOpenSci name.
+
 ``` r
 path1 <- system.file(file.path("examples", "bad-no-alt.md"),
                                          package = "roblog")
@@ -69,7 +65,7 @@ roblog::ro_lint_md(path1)
 #>        should be {{< tweet "1200040510540386304">}},
 #> {{< tweet "969442252610191361">}}
 #> 
-#> A bit more work is needed on this wondrous post draft!
+#> A bit more work is needed on this amazing post draft!
 
 path2 <- system.file(file.path("examples", "bad-no-alt2.md"),
                                          package = "roblog")
@@ -81,12 +77,12 @@ roblog::ro_lint_md(path2)
 #> 
 #> * Please replace absolute links with relative links: https://ropensci.org/blog should become /blog.
 #> 
-#> A bit more work is needed on this kickass post draft!
+#> A bit more work is needed on this luminous post draft!
 
 path3 <- system.file(file.path("examples", "allgood.md"),
                                          package = "roblog")
 roblog::ro_lint_md(path3)
-#> All good, hmm! :-)
+#> All good, ole! :-)
 ```
 
 ## How to prepare your pull request
