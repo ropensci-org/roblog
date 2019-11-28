@@ -27,5 +27,7 @@ Imports:
     glue,
     commonmark,
     xml2,
-    magrittr
+    magrittr,
+    tidytext,
+    tibble
 RoxygenNote: 7.0.1

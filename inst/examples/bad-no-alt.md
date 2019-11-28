@@ -35,8 +35,15 @@ Here's how to use a Hugo shortcode to add an image.
 
 {{< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200">}}
 
-<!--html_preserve--> {{% figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" % alt = "altaltalt"}}
+{{< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" alt = "too short">}}
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">When I try to become acquainted with a new (to me) <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> package, I prefer to read ___________</p>&mdash; Jonathan Carroll (@carroll_jono) <a href="https://twitter.com/carroll_jono/status/969442252610191361?ref_src=twsrc%5Etfw">March 2, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+<!--html_preserve--> {{% figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" % alt = "an actually good description!"%}}
 <!--/html_preserve-->
+
+Ropensci was very nice, cool ropensci.
 
 #### Second awesome subsection
 

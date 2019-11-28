@@ -24,27 +24,56 @@ ro_lint_md <- function(path) {
   path %>%
     readLines() -> text
 
-  text %>%
-    commonmark::markdown_xml() %>%
+  text  %>%
+    glue::glue_collapse(sep = "\n") %>%
+    commonmark::markdown_xml(hardbreaks = TRUE) %>%
     xml2::read_xml() -> post_xml
 
+  issues <- c(rolint_alt(text),
+              rolint_ropensci(text))
+
+  if (length(issues) > 0) {
+    cat(paste("*", issues), sep = "\n\n")
+  }
+
+}
+
+rolint_ropensci <- function(text){
+  text <- glue::glue_collapse(text, sep = " ")
+  problems <- unlist(regmatches(text, gregexpr("ropensci",
+                                               text, ignore.case = TRUE)))
+
+  if (length(problems) == 0) {
+    return(NULL)
+  } else {
+    glue::glue("Please write rOpenSci in lower camelCase, not: {glue::glue_collapse(problems, sep = ', ')}.")
+  }
 }
 
 
-lint_alt <- function(path) {
-
-
-}
-
-no_alt <- function(text){
+rolint_alt <- function(text){
   text %>%
     rectangle_shortcodes() %>%
     dplyr::filter(name == "figure") %>%
-    dplyr::group_by(shortcode) %>%
-    dplyr::filter(!any(param_name == "alt")) -> df
+    dplyr::group_by(shortcode) -> df
 
-  if (nrow(df)) {
-    glue::glue_collapse(unique(df$shortcode), sep = ", ")
+  df %>%
+    dplyr::filter(param_name == "alt") %>%
+    # https://stackoverflow.com/questions/8920145/count-the-number-of-all-words-in-a-string
+    dplyr::mutate(param_value = gsub('\"', "", param_value),
+                  alt_length = lengths(gregexpr("\\W+", param_value)) + 1) %>%
+    dplyr::filter(alt_length < 3) -> df1
+
+  df %>%
+    dplyr::filter(!any(param_name == "alt")) -> df2
+
+  df3 <- rbind(df1, df2)
+
+
+  if (nrow(df3)) {
+    glue::glue("Alternative image description missing or too short for: {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+  } else {
+    NULL
   }
 }
 
@@ -82,10 +111,20 @@ rectangle_shortcode <- function(line) {
 }
 
 get_option <- function(param_name, params) {
-  stringr::str_extract(paste0(params, " "),
-                       paste0(param_name, ".*? ")) %>%
-    stringr::str_remove(param_name) %>%
-    trimws() -> param_value
+
+  if (grepl("alt", param_name)) {
+    stringr::str_extract(paste0(params, " "),
+                         paste0(param_name, '\\".*\\"? ')) %>%
+      stringr::str_remove(param_name) %>%
+      trimws() -> param_value
+  } else {
+    stringr::str_extract(paste0(params, " "),
+                         paste0(param_name, ".*? ")) %>%
+      stringr::str_remove(param_name) %>%
+      trimws() -> param_value
+  }
+
+
 
   tibble::tibble(param_name = trimws(gsub("\\=", "", param_name)),
                  param_value = param_value)
