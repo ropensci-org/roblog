@@ -20,7 +20,7 @@ shortcode_pattern_end <- function() {
 #' }
 ro_lint_md <- function(path) {
   if (!file.exists(path)) {
-    message(glue::glue("The file {path} could not be found."))
+    stop(glue::glue("The file {path} could not be found."))
   }
 
   path %>%
