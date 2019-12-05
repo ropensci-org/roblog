@@ -14,30 +14,53 @@ remotes::install_github("ropenscilabs/roblog")
 
 ## (R) Markdown templates
 
-If you want to execute code, use the R Markdown template. If not, use a
-Markdown template.
+If you want to execute code, use the R Markdown post template. If not,
+use a Markdown post template. In both cases, use the Markdown author
+file template to store information such as your name, online presence.
 
-The helpers will create an untitled file with the template. Do not
-forget to save it.
+The helpers will create an untitled file with the template in RStudio.
+Do not forget to save it. Save R Markdown files as .Rmd and Markdown
+files as .md.
 
 ### R Markdown template
 
 Either
 
-  - Use the RStudio addin
+  - Use the RStudio addin,
 
-  - Select the template via File \> New File \> R Markdown \> From
-    Template
+  - Or select the template via File \> New File \> R Markdown \> From
+    Template in RStudio,
 
-  - Run `roblog::ro_blog_post_rmd()`
+  - Or run `roblog::ro_blog_post_rmd()` in RStudio,
+
+  - Or [copy-paste from the source
+    file](https://github.com/ropenscilabs/roblog/blob/master/inst/rmarkdown/templates/ropensci-blog-post/skeleton/skeleton.Rmd).
 
 ### Markdown template
 
 Either
 
-  - Use the RStudio addin
+  - Use the RStudio addin,
 
-  - Run `roblog::ro_blog_post_md()`
+  - Or run `roblog::ro_blog_post_md()` in RStudio,
+
+  - Or [copy-paste from the source
+    file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/markdown-post.md).
+
+### Author File
+
+You’ll need to create a file with your information (name, online
+presence) if you haven’t already got one under
+[roweb2/content/authors](https://github.com/ropensci/roweb2/tree/master/content/authors).
+
+Either
+
+  - Call the add-in from RStudio,
+
+  - Or run `roblog::ro_blog_post_author()` in RStudio,
+
+  - Or [copy-paste from the source
+    file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/author-name.md).
 
 ## Lint
 
@@ -69,7 +92,7 @@ roblog::ro_lint_md(path1)
 #>        should be {{< tweet "1200040510540386304">}},
 #> {{< tweet "969442252610191361">}}
 #> 
-#> A bit more work is needed on this cat's pajamas post draft!
+#> A bit more work is needed on this impressive post draft!
 roblog::ro_check_urls(path1)
 #> Possibly broken URLs: https://masalmon.eu/40004, https://masalmon.eu/400040.
 ```

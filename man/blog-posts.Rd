@@ -3,16 +3,23 @@
 \name{ro_blog_post_rmd}
 \alias{ro_blog_post_rmd}
 \alias{ro_blog_post_md}
+\alias{ro_blog_post_author}
 \title{Create a new rOpenSci (R) Markdown Blog Post}
 \usage{
 ro_blog_post_rmd()
 
 ro_blog_post_md()
+
+ro_blog_post_author()
 }
 \description{
 Create a new rOpenSci Blog Post,
-either R Markdown (`ro_blog_post_rmd()`) or Markdown (`ro_blog_post_md()`)
+either R Markdown (`ro_blog_post_rmd()`) or Markdown (`ro_blog_post_md()`),
+ or an author file, in RStudio.
 }
 \details{
-Call it via the add-in or directly.
+Call them via the add-in or directly.
+
+`ro_blog_post_md()` and `ro_blog_post_author()` create Markdown files,
+ RStudio might warn you against saving them as ".md" but ignore that.
 }

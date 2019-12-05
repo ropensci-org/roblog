@@ -7,3 +7,8 @@ Name: rOpenSci Markdown Post
 Description: Create a new rOpenSci Markdown Blog Post
 Binding: ro_blog_post_md
 Interactive: false
+
+Name: rOpenSci Author File
+Description: Create an rOpenSci Author Metadata File
+Binding: ro_blog_post_author
+Interactive: false
