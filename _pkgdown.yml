@@ -1,11 +1,14 @@
 navbar:
   structure:
-    left:  [home, getstarted, articles, reference, news]
+    left:  [home, getstarted, articles, checklists, reference, news]
     right: [github]
   components:
     getstarted:
       text: Content guidelines
       href: articles/content-guidelines.html
+    checklists:
+      text: Checklists
+      href: articles/checklists.html
     articles:
       text: Technical guidance
       menu:

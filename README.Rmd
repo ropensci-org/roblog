@@ -15,7 +15,7 @@ out.width = "100%"
 
 # roblog
 
-Are you preparing a blog post or tech note for rOpenSci? Stay here! The goal of roblog is to provide guidance (docs!) and practical helpers (templates! checklists! functions!) for authors of blog posts and tech notes on rOpenSci website. 
+Are you preparing a blog post or tech note for rOpenSci, after getting the go-ahead and a tentative publication date from our community manager [Stefanie Butland](https://ropensci.org/authors/stefanie-butland/)? Stay here! The goal of roblog is to provide guidance (docs!) and practical helpers (templates! checklists! functions!) for authors of blog posts and tech notes on rOpenSci website. 
 
 We're looking forward to reading your content!
 
