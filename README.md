@@ -10,6 +10,11 @@ tech notes on rOpenSci website.
 
 We’re looking forward to reading your content\!
 
+## Start here
+
+First read [the content guidance](/content-guidelines.html) then the
+technical guidance.
+
 ## (R) Markdown templates
 
 If you want to execute code, use the R Markdown post template. If not,

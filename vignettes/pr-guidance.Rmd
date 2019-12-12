@@ -1,5 +1,5 @@
 ---
-title: "GitHub guidance"
+title: "Submission guidance"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pr-guidance}
@@ -13,6 +13,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+## Fork and clone the website
 
 You'll need to fork https://github.com/ropensci/roweb2 and create a branch. You can either use your usual workflow for that, or use [`usethis` helpers](https://usethis.r-lib.org/articles/articles/pr-functions.html), see below.
 
@@ -28,6 +30,20 @@ usethis::create_from_github("ropensci/roweb2")
 usethis::pr_init(branch = "mypost")
 ```
 * Work locally (adding your post)
+
+## Add your post
+
+In your local copy of the website,
+
+* Add [your author metadata](/articles/author-file-guidance.html)
+
+* Add your post as a bundle i.e.
+
+    * create the folder `content/blog/date-slug/` or `content/technotes/date-slug/` e.g. `content/blog/2019-12-12-roblog/` or `content/technotes/2019-12-12-roblog/`
+    
+    * in that folder add the post as `index.md`, if it exists the R Markdown source `index.Rmd`, and any image the post needs.
+
+## Submission and review
 
 * Open the PR
 

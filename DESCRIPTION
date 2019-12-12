@@ -50,7 +50,8 @@ Suggests:
     rmarkdown,
     knitr,
     testthat (>= 2.1.0),
-    details
+    details,
+    gluedown
 Remotes:
     ropensci/crul
 VignetteBuilder: knitr

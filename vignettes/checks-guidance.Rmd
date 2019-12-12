@@ -14,6 +14,23 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Checklist
+
+```{r, echo = FALSE}
+library("magrittr")
+read.csv(system.file("checklists", "submission-checklist.csv",
+                  package="roblog"),
+         header = FALSE,
+         stringsAsFactors = FALSE) %>% 
+  .[,1] %>%
+  gluedown::md_task() -> x
+
+glue::glue("````markdown\n{x}\n````") %>% 
+  knitr::asis_output()
+```
+
+## Linting
+
 Functions to be run on the path to your blog post (rendered, not the Rmd) 
 
 `ro_lint_md()` should identify some potential problems and enforce: the use of complete alternative descriptions for image, of relative links to rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for rOpenSci name.

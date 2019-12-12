@@ -19,6 +19,10 @@ Are you preparing a blog post or tech note for rOpenSci? Stay here! The goal of 
 
 We're looking forward to reading your content!
 
+## Start here
+
+First read [the content guidance](/content-guidelines.html) then the technical guidance.
+
 ## (R) Markdown templates
 
 If you want to execute code, use the R Markdown post template. If not, use a Markdown post template. In both cases, use the Markdown author file template to store information such as your name, online presence.

@@ -14,6 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
+## A workflow suggestion
+
+* Create a new R project (RStudio project for instance) in a dedicated folder e.g. `MyPost/`.
+
+* Use the template (See following section) to create a  `index.Rmd` at the root of that folder.
+
+* Work in that folder until you feel it's ready for submission. Then [refer to the submission guidance](articles/pr-guidance.html).
+
+> Knitting the Rmd will generate both .html and .md files. Please do not include the html in your pull request to roweb2.
+
 ## Start from the template
 
 Either
