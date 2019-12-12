@@ -1,6 +1,6 @@
 ---
 slug: post-template
-title: Wonderful title
+title: Your Post Title in Title Case
 package_version: 0.1.0
 authors:
   - Author Name
@@ -50,11 +50,11 @@ The figure paths in the resulting Markdown will already be valid so you won't ne
 
 Introduction including outline of the post.
 
-### First awesome section
+### First section
 
 I like Hugo[^1]. Yes, that is how you add a footnote.
 
-#### First awesome subsection of the first awesome section
+#### First subsection of the first section
 
 Below is an image, for instance your package logo, or a cute puppy picture. Here's how to use a Hugo shortcode to include it. You must use the exact same syntax as below i.e. with the html preserve comments and percent signs, otherwise the knitting will break the syntax. You can use [all options documented for the figure shortcode](https://gohugo.io/content-management/shortcodes/#figure).
 
@@ -79,7 +79,7 @@ plot(1:10)
 
 Once this file is knitted the plot above will be inserted with the correct syntax.
 
-#### Second awesome subsection
+#### Second subsection
 
 Here's how to use a Hugo shortcode to embed a tweet. We recommend the use of [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/) to include tweets, Vimeo or Youtube videos, gists, etc. Again, use the exact same syntax as below i.e. with the html preserve comments and percent signs, otherwise the knitting will break the syntax.
 
