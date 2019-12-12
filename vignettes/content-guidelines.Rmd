@@ -1,0 +1,10 @@
+---
+title: "Content guidelines"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{content-guidelines}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+General narrative about content.

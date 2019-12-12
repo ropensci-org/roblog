@@ -1,0 +1,41 @@
+---
+title: "Create your author metadata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{author-file-guidance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+You'll need to create a file with your information (name, online presence) if you haven't already got one under [roweb2/content/authors](https://github.com/ropensci/roweb2/tree/master/content/authors).
+
+## Why?
+
+[Example of post, see clickable author name](https://ropensci.org/blog/2018/06/08/rprofile-julia-silge/).
+
+[Example author page](https://ropensci.org/authors/kelly-obriant/).
+
+```{r}
+details::details(readLines("https://raw.githubusercontent.com/ropensci/roweb2/master/content/authors/kelly-obriant/_index.md"), summary = "Author metadata file", lang = "yaml")
+
+```
+
+The author metadata is the occasion to add links to your online presence, very good for future interactions (keywords: personal branding).
+
+## How to?
+
+Either
+
+* Call the add-in from RStudio,
+
+* Or run `roblog::ro_blog_post_author()` in RStudio,
+
+* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/author-name.md).
+

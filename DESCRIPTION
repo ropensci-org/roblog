@@ -44,6 +44,10 @@ Imports:
     crul
 RoxygenNote: 7.0.2
 Suggests: 
-    testthat (>= 2.1.0)
+    rmarkdown,
+    knitr,
+    testthat (>= 2.1.0),
+    details
 Remotes:
     ropensci/crul
+VignetteBuilder: knitr
