@@ -10,6 +10,8 @@ navbar:
         href: articles/content-guidelines-general.html
       - text: For a post about a peer-reviewed package
         href: articles/content-guidelines-peer-reviewed-pkg.html
+      - text: Style guide for all posts
+        href: articles/styleguide.html
     checklists:
       text: Checklists
       href: articles/checklists.html
@@ -24,6 +26,8 @@ navbar:
         href: articles/checks-guidance.html
       - text: Create your author metadata
         href: articles/author-file-guidance.html
+      - text: View your post locally
+        href: articles/local-preview.html
       - text: Submit your post
         href: articles/pr-guidance.html
 

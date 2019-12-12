@@ -1,0 +1,26 @@
+---
+title: "Style guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{styleguide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+- For formatting of package names, functions, and code, follow the [tidyverse style guidance](https://style.tidyverse.org/documentation.html#r-code).
+
+- Use ### or #### to format headings in your post; larger sizes don't look good. Note long headings with #### don't wrap well.
+
+- Spell 'rOpenSci', not 'ROpenSci'
+
+- When adding links to our website please use relative instead of absolute URLs: e.g. `/blog/` instead of `https://ropensci.org/blog/`.
+
+- Use informative alternative text for all images. Regarding the content of the alternative text, refer [to this tutorial](https://www.w3.org/WAI/tutorials/images/informative/). Regarding _how_ to add alternative text, refer to technical information in the [R Markdown template](https://docs.ropensci.org/roblog/articles/rmd-guidance.html) or in [the Markdown template](https://docs.ropensci.org/roblog/articles/md-guidance.html). 

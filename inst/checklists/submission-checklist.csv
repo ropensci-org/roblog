@@ -1,6 +1,7 @@
 I have read the content guidelines.
 Stef told me whether this should be a blog post or a tech note.
 I included my author metadata.
+I have added relevant tags after browsing existing tags.
 I used the R Markdown template or Markdown template.
 I added my post in a bundle.
 I ran `roblog::ro_lint_md()` on index.md.
