@@ -26,10 +26,10 @@ navbar:
         href: articles/checks-guidance.html
       - text: Create your author metadata
         href: articles/author-file-guidance.html
-      - text: View your post locally
-        href: articles/local-preview.html
       - text: Submit your post
         href: articles/pr-guidance.html
+      - text: Optionally view your post locally
+        href: articles/local-preview.html
 
 toc:
   depth: 3

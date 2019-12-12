@@ -24,7 +24,11 @@ In a nutshell, the process will be
       - either directly as a Markdown file
       - or from R Markdown If you want to execute code, use the R
         Markdown post template. If not, use a Markdown post template.
-  - You make a pull request to the website repo, review ensues.
+  - You make a pull request to the website repo, adding 1) author
+    metadata 2) a **folder** under `content/blog/` or
+    `content/technotes/` with the post, optionally its source, the
+    images.
+  - Review ensues.
 
 CREATE AN EXAMPLE PR ONCE THE TEMPLATE IS DECIDED.
 
