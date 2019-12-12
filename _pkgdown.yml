@@ -5,7 +5,11 @@ navbar:
   components:
     getstarted:
       text: Content guidelines
-      href: articles/content-guidelines.html
+      menu:
+      - text: For any post
+        href: articles/content-guidelines-general.html
+      - text: For a post about a peer-reviewed package
+        href: articles/content-guidelines-peer-reviewed-pkg.html
     checklists:
       text: Checklists
       href: articles/checklists.html
