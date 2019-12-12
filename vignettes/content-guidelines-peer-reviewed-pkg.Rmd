@@ -13,7 +13,4 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-```{r setup}
-library(roblog)
-```
+Blog posts about peer reviewed packages are a special case, so we’ve got some specific recommendations for these.
