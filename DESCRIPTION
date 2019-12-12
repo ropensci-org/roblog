@@ -18,7 +18,13 @@ Authors@R:
       person(given = "Amanda",
              family = "Dobbyn",
              role = "ctb",
-             email = "amanda.e.dobbyn@gmail.com"))
+             email = "amanda.e.dobbyn@gmail.com"),
+      person(given = "Christophe",
+             family = "Dervieux",
+             role = "ctb"),
+      person(given = "Romain",
+             family = "LESUR",
+             role = "ctb"))
 Imports: 
     git2r,
     fs,
