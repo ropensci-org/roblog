@@ -15,7 +15,9 @@ out.width = "100%"
 
 # roblog
 
-The goal of roblog is to provide (practical) guidance for authors of blog posts and tech notes on rOpenSci blog. We're thrilled that you want to write for our blogs, and looking forward to reading your content!
+Are you preparing a blog post or tech note for rOpenSci? Stay here! The goal of roblog is to provide guidance (docs!) and practical helpers (templates! checklists! functions!) for authors of blog posts and tech notes on rOpenSci website. 
+
+We're looking forward to reading your content!
 
 ## (R) Markdown templates
 
