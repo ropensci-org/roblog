@@ -53,7 +53,7 @@ glue::glue("```yaml\n----\n{x}---\n```")%>%
 
 ### Save the file
 
-In your fork of th website, under content/authors/, create a folder corresponding to your slugified name -- look at [other folder names](https://github.com/ropensci/roweb2/tree/master/content/authors) to get an idea. Save your author file as `_index.md` under this folder. E.g.:
+In your fork of the website, under content/authors/, create a folder corresponding to your slugified name -- look at [other folder names](https://github.com/ropensci/roweb2/tree/master/content/authors) to get an idea. Save your author file as `_index.md` under this folder. E.g.:
 
 * Kelly O'Briant in `content/authors/kelly-obriant/_index.md`,
 
