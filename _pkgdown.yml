@@ -1,0 +1,28 @@
+navbar:
+  structure:
+    left:  [home, getstarted, articles, checklists, reference, news]
+    right: [github]
+  components:
+    getstarted:
+      text: Content guidelines
+      href: articles/content-guidelines.html
+    checklists:
+      text: Checklists
+      href: articles/checklists.html
+    articles:
+      text: Technical guidance
+      menu:
+      - text: Write from R Markdown
+        href: articles/rmd-guidance.html
+      - text: Or write from Markdown
+        href: articles/md-guidance.html
+      - text: Check your post
+        href: articles/checks-guidance.html
+      - text: Create your author metadata
+        href: articles/author-file-guidance.html
+      - text: Submit your post
+        href: articles/pr-guidance.html
+
+toc:
+  depth: 3
+

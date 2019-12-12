@@ -1,0 +1,36 @@
+---
+title: "Write a post in Markdown"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{md-guidance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Start from the template
+
+Either
+
+* Use the RStudio addin,
+
+* Or run `roblog::ro_blog_post_md()` in RStudio,
+
+* Or copy-paste the text below (hover, a copy-paste button will appear at the top-right corner of the shaded area).
+
+```{r, echo = FALSE}
+library("magrittr")
+readLines(system.file("templates", "markdown-post.md",
+                  package="roblog")) %>% 
+  glue::glue_collapse(sep = "\n") -> x
+
+glue::glue("````markdown\n{x}\n````") %>% 
+  knitr::asis_output()
+```
+

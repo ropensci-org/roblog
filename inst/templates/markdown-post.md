@@ -1,6 +1,6 @@
 ---
 slug: "post-template"
-title: Wonderful title
+title: Your Post Title in Title Case
 package_version: 0.1.0
 authors:
   - Author Name
@@ -21,21 +21,21 @@ Save this file under /content/blog/YEAR-MONTH-DAY-slug.md in the local copy of y
 
 Beware! If you want to generate this post from R Markdown, use the R Markdown template instead!
 
-  Everywhere in this template (YAML, paths to images), you should change "post-template" to the slug of your post, and "2019-06-04" to the publication date.
+Throughout this template (YAML), you should change "post-template" to the slug of your post, and "2019-06-04" to your publication date.
 
 Introduction including outline of the post.
 
-### First awesome section
+### First section
 
 I like Hugo[^1]. Yes, that is how you add a footnote.
 
-#### First awesome subsection of the first awesome section
+#### First subsection of the first section
 
 Here's how to use a Hugo shortcode to add an image.
 
 {{< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" alt = "this is the alternative text" >}}
 
-#### Second awesome subsection
+#### Second subsection
 
 Here's how to use a Hugo shortcode to embed a tweet. We recommend the use of [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/) to include tweets, Vimeo or Youtube videos, gists, etc.
 

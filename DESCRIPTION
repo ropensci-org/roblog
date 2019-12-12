@@ -12,6 +12,9 @@ Authors@R:
              role = c("aut", "cre"),
              email = "maelle.salmon@yahoo.se",
              comment = c(ORCID = "0000-0002-2815-0399")),
+      person(given = "Stefanie",
+             family = "Butland",
+             role = "aut"),
       person(given = "rOpenSci",
              role = "fnd",
              comment = "https://ropensci.org/"),
@@ -44,6 +47,11 @@ Imports:
     crul
 RoxygenNote: 7.0.2
 Suggests: 
-    testthat (>= 2.1.0)
+    rmarkdown,
+    knitr,
+    testthat (>= 2.1.0),
+    details,
+    gluedown
 Remotes:
     ropensci/crul
+VignetteBuilder: knitr

@@ -15,13 +15,13 @@ out.width = "100%"
 
 # roblog
 
-The goal of roblog is to provide helpers for authors of blog posts and tech notes on rOpenSci blog.
+Are you preparing a blog post or tech note for rOpenSci, after getting the go-ahead and a tentative publication date from our community manager [Stefanie Butland](https://ropensci.org/authors/stefanie-butland/)? Stay here! The goal of roblog is to provide guidance (docs!) and practical helpers (templates! checklists! functions!) for authors of blog posts and tech notes on rOpenSci website. 
 
-## Installation
+We're looking forward to reading your content!
 
-``` r
-remotes::install_github("ropenscilabs/roblog")
-```
+## Start here
+
+First read [the content guidance](/content-guidelines.html) then the technical guidance.
 
 ## (R) Markdown templates
 
@@ -29,87 +29,9 @@ If you want to execute code, use the R Markdown post template. If not, use a Mar
 
 The helpers will create an untitled file with the template in RStudio. Do not forget to save it. Save R Markdown files as .Rmd and Markdown files as .md.
 
-### R Markdown template
 
-Either
+## Installation
 
-* Use the RStudio addin,
-
-* Or select the template via File > New File > R Markdown > From Template in RStudio,
-
-* Or run `roblog::ro_blog_post_rmd()` in RStudio,
-
-* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/rmarkdown/templates/ropensci-blog-post/skeleton/skeleton.Rmd).
-
-### Markdown template
-
-Either
-
-* Use the RStudio addin,
-
-* Or run `roblog::ro_blog_post_md()` in RStudio,
-
-* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/markdown-post.md).
-
-### Author File
-
-You'll need to create a file with your information (name, online presence) if you haven't already got one under [roweb2/content/authors](https://github.com/ropensci/roweb2/tree/master/content/authors).
-
-Either
-
-* Call the add-in from RStudio,
-
-* Or run `roblog::ro_blog_post_author()` in RStudio,
-
-* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/author-name.md).
-
-## Lint
-
-Functions to be run on the path to your blog post (rendered, not the Rmd) 
-
-`ro_lint_md()` should identify some potential problems and enforce: the use of complete alternative descriptions for image, of relative links to rOpenSci website, of Hugo shortcodes for tweets, of lower camelCase for rOpenSci name.
-
-`ro_check_urls()` will identify possibly broken URLs.
-
-```{r lint}
-path1 <- system.file(file.path("examples", "bad-no-alt.md"),
-                                         package = "roblog")
-roblog::ro_lint_md(path1)
-roblog::ro_check_urls(path1)
-```
-
-## How to prepare your pull request
-
-You'll need to fork https://github.com/ropensci/roweb2 and create a branch. You can either use your usual workflow for that, or use [`usethis` helpers](https://usethis.r-lib.org/articles/articles/pr-functions.html), see below.
-
-* Create the fork and check it out locally:
-
-```r
-usethis::create_from_github("ropensci/roweb2")
-```
-
-* Create a branch
-
-```r
-usethis::pr_init(branch = "mypost")
-```
-* Work locally (adding your post)
-
-* Open the PR
-
-```r
-usethis::pr_push()
-```
-* Get feedback and use it
-
-* Get changes from GitHub to local (e.g. Stef made a suggestion in the PR review and you accepted it)
-
-```r
-usethis::pr_pull()
-```
-
-* Get local changes to GitHub (e.g. you updated a paragraph and improved a figure from your laptop)
-
-```r
-usethis::pr_push
+``` r
+install.packages("roblog", repos = "https://dev.ropensci.org")
 ```

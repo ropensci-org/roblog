@@ -1,9 +1,9 @@
 ---
 name: Author Name
-link: https://kellobri.github.io/
-twitter: kellrstats
-github: kellobri
-gitlab: yourgitlabusername
-keybase: yourkeybaseid
-orcid: your orcidid
+link: URL to your favourite online presence
+twitter: your Twitter username
+github: your GitHub username
+gitlab: your GitLab username
+keybase: your Keybase ID
+orcid: your ORCID ID
 ---
