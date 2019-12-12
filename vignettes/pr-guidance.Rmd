@@ -42,10 +42,10 @@ usethis::pr_push()
 usethis::pr_pull()
 ```
 
-* Get local changes to GitHub (e.g. you updated a paragraph and improved a figure from your laptop)
+* Get local changes to GitHub (e.g. you updated a paragraph and improved a figure from your machine)
 
 ```r
-usethis::pr_push
+usethis::pr_push()
 ```
 
 

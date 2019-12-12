@@ -18,24 +18,40 @@ You'll need to create a file with your information (name, online presence) if yo
 
 ## Why?
 
+The author metadata is the occasion to add links to your online presence, very good for future interactions (keywords: personal branding).
+
 [Example of post, see clickable author name](https://ropensci.org/blog/2018/06/08/rprofile-julia-silge/).
 
 [Example author page](https://ropensci.org/authors/kelly-obriant/).
 
-```{r}
+```{r, echo = FALSE}
 details::details(readLines("https://raw.githubusercontent.com/ropensci/roweb2/master/content/authors/kelly-obriant/_index.md"), summary = "Author metadata file", lang = "yaml")
-
 ```
-
-The author metadata is the occasion to add links to your online presence, very good for future interactions (keywords: personal branding).
 
 ## How to?
 
+### Create the file
+
 Either
 
-* Call the add-in from RStudio,
+* Call the add-in "rOpenSci Author" from RStudio,
 
 * Or run `roblog::ro_blog_post_author()` in RStudio,
 
-* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/author-name.md).
+* Or copy-paste the text below.
+
+```{r, echo = FALSE}
+details::details(readLines(system.file("templates", "author-name.md",
+                  package="roblog")), summary = "Click here", lang = "yaml")
+```
+
+### Save the file
+
+In your fork of th website, under content/authors/, create a folder corresponding to your slugified name -- look at [other folder names](https://github.com/ropensci/roweb2/tree/master/content/authors) to get an idea. Save your author file as `_index.md` under this folder. E.g.:
+
+* Kelly O'Briant in `content/authors/kelly-obriant/_index.md`,
+
+* Stefanie Butland in `content/authors/stefanie-butland/_index.md`,
+
+* Maëlle Salmon in `content/authors/maëlle-salmon/_index.md`.
 

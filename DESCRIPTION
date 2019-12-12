@@ -24,7 +24,10 @@ Authors@R:
              role = "ctb"),
       person(given = "Romain",
              family = "LESUR",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Stefanie",
+             family = "Butland",
+             role = "aut"))
 Imports: 
     git2r,
     fs,
