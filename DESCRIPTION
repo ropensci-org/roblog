@@ -55,3 +55,5 @@ Suggests:
 Remotes:
     ropensci/crul
 VignetteBuilder: knitr
+URL: https://docs.ropensci.org/roblog/, https://github.com/ropenscilabs/roblog
+BugReports: https://github.com/ropenscilabs/roblog/issues
