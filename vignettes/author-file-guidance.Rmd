@@ -38,11 +38,17 @@ Either
 
 * Or run `roblog::ro_blog_post_author()` in RStudio,
 
-* Or copy-paste the text below.
+* Or copy-paste the text below (hover, a copy-paste button will appear at the top-right corner of the shaded area).
 
 ```{r, echo = FALSE}
-details::details(readLines(system.file("templates", "author-name.md",
-                  package="roblog")), summary = "Click here", lang = "yaml")
+library("magrittr")
+yaml::read_yaml(system.file("templates", "author-name.md",
+                  package="roblog")) %>% 
+  yaml::as.yaml() %>%
+  glue::glue_collapse("\n") -> x
+
+glue::glue("```yaml\n----\n{x}---\n```")%>%
+  knitr::asis_output()
 ```
 
 ### Save the file

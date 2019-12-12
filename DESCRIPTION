@@ -12,6 +12,9 @@ Authors@R:
              role = c("aut", "cre"),
              email = "maelle.salmon@yahoo.se",
              comment = c(ORCID = "0000-0002-2815-0399")),
+      person(given = "Stefanie",
+             family = "Butland",
+             role = "aut"),
       person(given = "rOpenSci",
              role = "fnd",
              comment = "https://ropensci.org/"),
@@ -24,10 +27,7 @@ Authors@R:
              role = "ctb"),
       person(given = "Romain",
              family = "LESUR",
-             role = "ctb"),
-      person(given = "Stefanie",
-             family = "Butland",
-             role = "aut"))
+             role = "ctb"))
 Imports: 
     git2r,
     fs,

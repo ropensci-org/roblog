@@ -22,6 +22,15 @@ Either
 
 * Or run `roblog::ro_blog_post_md()` in RStudio,
 
-* Or [copy-paste from the source file](https://github.com/ropenscilabs/roblog/blob/master/inst/templates/markdown-post.md).
+* Or copy-paste the text below (hover, a copy-paste button will appear at the top-right corner of the shaded area).
 
+```{r, echo = FALSE}
+library("magrittr")
+readLines(system.file("templates", "markdown-post.md",
+                  package="roblog")) %>% 
+  glue::glue_collapse(sep = "\n") -> x
+
+glue::glue("````markdown\n{x}\n````") %>% 
+  knitr::asis_output()
+```
 
