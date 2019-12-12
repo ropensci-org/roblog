@@ -34,6 +34,7 @@ In a nutshell, the process will be
 CREATE AN EXAMPLE PR ONCE THE TEMPLATE IS DECIDED.
 
 First read [the content guidance](https://docs.ropensci.org/roblog/articles/content-guidelines.html) then the technical guidance. Use the navbar at the top of this website to navigate content. The [checklists](https://docs.ropensci.org/roblog/articles/checklists.html) will help you not forget bits and pieces.
+
 ## Installation
 
 ``` r

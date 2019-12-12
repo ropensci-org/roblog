@@ -33,7 +33,9 @@ guidance](https://docs.ropensci.org/roblog/articles/content-guidelines.html)
 then the technical guidance. Use the navbar at the top of this website
 to navigate content. The
 [checklists](https://docs.ropensci.org/roblog/articles/checklists.html)
-will help you not forget bits and pieces. \#\# Installation
+will help you not forget bits and pieces.
+
+## Installation
 
 ``` r
 install.packages("roblog", repos = "https://dev.ropensci.org")
