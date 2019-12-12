@@ -24,19 +24,20 @@ Throughout this template (YAML, code chunk below), you should change "post-templ
 The chunk below ensures your plots will be inserted in the same folder as your Rmd so you can submit the bundle (.Rmd, .md, images) to roweb2.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.path = '', comment = "")
+knitr::opts_chunk$set(fig.path = "", comment = "")
 
 knitr::knit_hooks$set(
   plot = function(x, options) {
-    hugoopts  <- options$hugoopts
+    hugoopts <- options$hugoopts
     paste0(
       "{{<figure src=",
       '"', x, '" ',
-      if (!is.null(hugoopts)) glue::glue_collapse(
-        glue::glue('{names(hugoopts)}="{hugoopts}"'
-                   ),
-        sep = " "
-      ),
+      if (!is.null(hugoopts)) {
+        glue::glue_collapse(
+          glue::glue('{names(hugoopts)}="{hugoopts}"'),
+          sep = " "
+        )
+      },
       ">}}\n"
     )
   }
