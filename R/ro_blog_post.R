@@ -6,7 +6,10 @@
 #'
 #' @export
 #'
-#' @details Call them via the add-in or directly.
+#' @details Call them via the add-in or directly or get the [templates online](https://ropensci-blog-guidance.netlify.com/postmd.html).
+#'
+#' In any case, an internet connection is required as templates are downloaded
+#' fresh from their source
 #'
 #' `ro_blog_post_md()` and `ro_blog_post_author()` create Markdown files,
 #'  RStudio might warn you against saving them as ".md" but ignore that.
@@ -26,21 +29,17 @@ ro_blog_post_rmd <- function() {
 #' @rdname blog-posts
 #' @export
 ro_blog_post_md <- function() {
-  rstudioapi::documentNew(glue::glue_collapse(
-    readLines(
-      system.file("templates", "markdown-post.md",
-                  package="roblog")),
-    sep = "\n"),
+  txt <- get_tmpl("post-template.md")
+  rstudioapi::documentNew(
+    txt,
     type = "rmarkdown")
 }
 
 #' @rdname blog-posts
 #' @export
 ro_blog_post_author <- function() {
-  rstudioapi::documentNew(glue::glue_collapse(
-    readLines(
-      system.file("templates", "author-name.md",
-                  package="roblog")),
-    sep = "\n"),
+  txt <- get_tmpl("author-file-template.md")
+  rstudioapi::documentNew(
+    txt,
     type = "rmarkdown")
 }
