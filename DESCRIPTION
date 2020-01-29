@@ -58,3 +58,4 @@ Remotes:
 VignetteBuilder: knitr
 URL: https://docs.ropensci.org/roblog/, https://github.com/ropenscilabs/roblog
 BugReports: https://github.com/ropenscilabs/roblog/issues
+Roxygen: list(markdown = TRUE)

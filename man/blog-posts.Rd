@@ -14,12 +14,15 @@ ro_blog_post_author()
 }
 \description{
 Create a new rOpenSci Blog Post,
-either R Markdown (`ro_blog_post_rmd()`) or Markdown (`ro_blog_post_md()`),
- or an author file, in RStudio.
+either R Markdown (\code{ro_blog_post_rmd()}) or Markdown (\code{ro_blog_post_md()}),
+or an author file, in RStudio.
 }
 \details{
-Call them via the add-in or directly.
+Call them via the add-in or directly or get the \href{https://ropensci-blog-guidance.netlify.com/postmd.html}{templates online}.
 
-`ro_blog_post_md()` and `ro_blog_post_author()` create Markdown files,
- RStudio might warn you against saving them as ".md" but ignore that.
+In any case, an internet connection is required as templates are downloaded
+fresh from their source
+
+\code{ro_blog_post_md()} and \code{ro_blog_post_author()} create Markdown files,
+RStudio might warn you against saving them as ".md" but ignore that.
 }
