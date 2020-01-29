@@ -1,6 +1,6 @@
 Package: roblog
 Type: Package
-Title: Provides Helpers for roweb2 Blogging
+Title: rOpenSci's blog guidance
 Version: 0.1.0
 Description: It provides templates for roweb2 blogging and help for a GitHub forking workflow.
 License: MIT + file LICENSE
