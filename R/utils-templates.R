@@ -3,7 +3,7 @@
 get_tmpl <- function(template) {
 
   tmpl_txt <- gh::gh("/repos/:owner/:repo/contents/:path",
-                     owner = "rosadmin",
+                     owner = "ropensci-org",
                      repo = "blog-guidance",
                      path = glue::glue("templates/{template}")
   )

@@ -16,15 +16,10 @@
 #'
 #' @rdname blog-posts
 ro_blog_post_rmd <- function() {
-  rstudioapi::documentNew(glue::glue_collapse(
-    readLines(
-      system.file(file.path("rmarkdown",
-                            "templates",
-                            "ropensci-blog-post",
-                            "skeleton"), "skeleton.Rmd",
-                  package="roblog")),
-    sep = "\n"),
-                          type = "rmarkdown")
+  txt <- get_tmpl("post-template.Rmd")
+  rstudioapi::documentNew(
+    txt,
+    type = "rmarkdown")
 }
 #' @rdname blog-posts
 #' @export
