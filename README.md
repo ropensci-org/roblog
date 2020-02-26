@@ -22,5 +22,5 @@ guidance](https://ropensci-blog-guidance.netlify.com/).
 ## Installation
 
 ``` r
-install.packages("roblog", repos = "https://dev.ropensci.org")
+remotes::install_github("ropenscilabs/roblog")
 ```

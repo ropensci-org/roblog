@@ -26,5 +26,5 @@ Best paired with [rOpenSci blog guidance](https://ropensci-blog-guidance.netlify
 ## Installation
 
 ``` r
-install.packages("roblog", repos = "https://dev.ropensci.org")
+remotes::install_github("ropenscilabs/roblog")
 ```
