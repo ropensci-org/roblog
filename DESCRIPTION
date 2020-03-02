@@ -45,7 +45,7 @@ Imports:
     stringr,
     purrr,
     rlang,
-    crul
+    crul ( >= 0.9.1.9992)
 RoxygenNote: 7.0.2
 Suggests: 
     rmarkdown,
