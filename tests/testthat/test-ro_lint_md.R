@@ -31,3 +31,10 @@ test_that("ro_lint_md finds absolute links", {
   testthat::expect_message(ro_lint_md(path), "relative links")
 })
 
+test_that("ro_lint_md finds title not in title case", {
+  path <- system.file(file.path("examples", "badtitle.md"),
+                      package = "roblog")
+  testthat::expect_message(ro_lint_md(path), "Title Case")
+})
+
+

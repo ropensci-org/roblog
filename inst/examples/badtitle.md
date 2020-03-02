@@ -1,6 +1,6 @@
 ---
 slug: "post-template"
-title: Wonderful Title
+title: Wonderful title that is not in title case
 package_version: 0.1.0
 authors:
   - Author Name

@@ -28,6 +28,7 @@ ro_lint_md <- function(path) {
   post_xml <- get_xml(text)
 
   issues <- c(rolint_alt_shortcode(text),
+              rolint_title(path),
               rolint_alt_xml(post_xml),
               rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
@@ -196,6 +197,19 @@ rolint_absolute_links <- function(post_xml) {
     relative_links <- glue::glue_collapse(relative_links, sep = ", ")
 
     glue::glue("Please replace absolute links with relative links: {absolute_links} should become {relative_links}.")
+  } else {
+    return(NULL)
+  }
+
+}
+
+rolint_title <- function(path) {
+  title <- yaml::yaml.load(readLines(path)[1:10])$title
+
+  good_title <- snakecase::to_title_case(title)
+
+  if (title != good_title) {
+    glue::glue("Use Title Case for the title i.e. {good_title}.")
   } else {
     return(NULL)
   }
