@@ -234,7 +234,7 @@ rolint_figure_shortcode <- function(post_xml) {
 
   dest <- xml2::xml_attr(images, "destination")
 
-  glue::glue('Use Hugo shortcodes for images e.g. {{< figure src = "[dest]" alt = "an informative alternative description" >}}. Refer to Hugo docs for more options (size, alignment).',
+  glue::glue('Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage',
              .open = "[",
              .close = "]")
 
