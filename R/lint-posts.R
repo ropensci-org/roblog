@@ -19,6 +19,11 @@ shortcode_pattern_end <- function() {
 #'                     package = "roblog")
 #' }
 ro_lint_md <- function(path) {
+
+  if (!file.exists(path)) {
+    stop(glue::glue("The file {path} does not exist, did you make a typo?"))
+  }
+
   text <- try(readLines(path), silent = TRUE)
 
   if (inherits(text, "try-error")) {
@@ -29,6 +34,7 @@ ro_lint_md <- function(path) {
 
   issues <- c(rolint_alt_shortcode(text),
               rolint_title(path),
+              rolint_headings(post_xml),
               rolint_alt_xml(post_xml),
               rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
@@ -214,4 +220,20 @@ rolint_title <- function(path) {
     return(NULL)
   }
 
+}
+
+rolint_headings <- function(post_xml) {
+
+  post_xml %>%
+    xml2::xml_find_all("//heading") %>%
+    xml2::xml_text() -> headings
+
+  good_headings <- snakecase::to_sentence_case(headings)
+
+  if (any(headings != good_headings)) {
+    good <- glue::glue('"{good_headings[headings != good_headings]}"')
+    glue::glue('Use Sentence case for headings i.e. {toString(good)}.')
+  } else {
+    return(NULL)
+  }
 }

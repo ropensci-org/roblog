@@ -1,4 +1,5 @@
 get_xml <- function(text) {
+  text <- text[which(grepl("\\-\\-\\-", text))[2]:length(text)]
 
   text  %>%
     glue::glue_collapse(sep = "\n") %>%
