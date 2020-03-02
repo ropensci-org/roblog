@@ -35,7 +35,7 @@ ro_lint_md <- function(path) {
   issues <- c(rolint_alt_shortcode(text),
               rolint_title(path),
               rolint_headings(post_xml),
-              rolint_alt_xml(post_xml),
+              rolint_figure_shortcode(post_xml),
               rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
               rolint_absolute_links(post_xml))
@@ -157,21 +157,6 @@ get_option <- function(param_name, params) {
   tibble::tibble(param_name = trimws(gsub("\\=", "", param_name)),
                  param_value = param_value)
 }
-
-rolint_alt_xml <- function(post_xml) {
-
-  imgs <- xml2::xml_find_all(post_xml, "//image")
-  alt_length <- lengths(gregexpr("\\W+", xml2::xml_text(imgs)))
-  noalts <- xml2::xml_attr(imgs, "destination")[alt_length < 3]
-
-  if(length(noalts) == 0) {
-    return(NULL)
-  } else {
-    glue::glue("Alternative image description missing or too short for:\n {glue::glue_collapse(noalts, sep = ',\n')}")
-  }
-
-}
-
 rolint_tweet <- function(post_xml) {
   nodes <- xml2::xml_children(post_xml)
   prob <- xml2::xml_text(
@@ -236,4 +221,21 @@ rolint_headings <- function(post_xml) {
   } else {
     return(NULL)
   }
+}
+
+rolint_figure_shortcode <- function(post_xml) {
+
+  post_xml %>%
+    xml2::xml_find_all("//image") -> images
+
+  if (length(images) == 0) {
+    return(NULL)
+  }
+
+  dest <- xml2::xml_attr(images, "destination")
+
+  glue::glue('Use Hugo shortcodes for images e.g. {{< figure src = "[dest]" alt = "an informative alternative description" >}}. Refer to Hugo docs for more options (size, alignment).',
+             .open = "[",
+             .close = "]")
+
 }

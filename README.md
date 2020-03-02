@@ -17,7 +17,7 @@ here\! The goal of roblog is to provide practical helpers for authors of
 blog posts and tech notes on rOpenSci website.
 
 Best paired with [rOpenSci blog
-guidance](https://ropensci-blog-guidance.netlify.com/).
+guidance](https://blogguide.ropensci.org/).
 
 ## Installation
 

@@ -14,9 +14,6 @@ test_that("ro_lint_md find alt issues", {
   path <- system.file(file.path("examples", "bad-no-alt.md"),
                       package = "roblog")
   testthat::expect_message(ro_lint_md(path), "Alternative")
-  path <- system.file(file.path("examples", "bad-no-alt2.md"),
-                      package = "roblog")
-  testthat::expect_message(ro_lint_md(path), "Alternative")
 })
 
 test_that("ro_lint_md find embedded tweets issues", {
@@ -26,7 +23,7 @@ test_that("ro_lint_md find embedded tweets issues", {
 })
 
 test_that("ro_lint_md finds absolute links", {
-  path <- system.file(file.path("examples", "bad-no-alt2.md"),
+  path <- system.file(file.path("examples", "bad-no-alt.md"),
                       package = "roblog")
   testthat::expect_message(ro_lint_md(path), "relative links")
 })
@@ -41,6 +38,12 @@ test_that("ro_lint_md finds headings not in sentence", {
   path <- system.file(file.path("examples", "sentencecaseissue.md"),
                       package = "roblog")
   testthat::expect_message(ro_lint_md(path), "Sentence case")
+})
+
+test_that("ro_lint_md finds figures not using shortcodes", {
+  path <- system.file(file.path("examples", "figureissue.md"),
+                      package = "roblog")
+  testthat::expect_message(ro_lint_md(path), "Hugo shortcode")
 })
 
 
