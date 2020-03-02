@@ -1,11 +1,7 @@
-Package: roblog
 Type: Package
+Package: roblog
 Title: rOpenSci's blog guidance
 Version: 0.1.0
-Description: It provides templates for roweb2 blogging and help for a GitHub forking workflow.
-License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
 Authors@R: 
     c(person(given = "Maëlle",
              family = "Salmon",
@@ -28,36 +24,43 @@ Authors@R:
       person(given = "Romain",
              family = "LESUR",
              role = "ctb"))
+Description: It provides templates for roweb2 blogging and help
+    for a GitHub forking workflow.
+License: MIT + file LICENSE
+URL: https://docs.ropensci.org/roblog/,
+    https://github.com/ropenscilabs/roblog
+BugReports: https://github.com/ropenscilabs/roblog/issues
 Imports: 
-    git2r,
-    fs,
-    hrbrthemes,
-    rstudioapi,
-    glue,
-    gh,
     commonmark,
-    xml2,
-    magrittr,
-    tidytext,
-    tibble,
-    praise,
+    crul (>= 0.9.1.9992),
     dplyr,
-    stringr,
+    fs,
+    gh,
+    git2r,
+    glue,
+    hrbrthemes,
+    magrittr,
+    praise,
     purrr,
     rlang,
-    crul (>= 0.9.1.9992),
+    rstudioapi,
     snakecase,
+    stringr,
+    tibble,
+    tidytext,
+    xml2,
     yaml
-RoxygenNote: 7.0.2
 Suggests: 
-    rmarkdown,
-    knitr,
-    testthat (>= 2.1.0),
     details,
-    gluedown
+    gluedown,
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 Remotes:
     ropensci/crul
-VignetteBuilder: knitr
-URL: https://docs.ropensci.org/roblog/, https://github.com/ropenscilabs/roblog
-BugReports: https://github.com/ropenscilabs/roblog/issues
+Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2

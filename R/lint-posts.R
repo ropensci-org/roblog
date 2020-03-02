@@ -35,6 +35,7 @@ ro_lint_md <- function(path) {
   issues <- c(rolint_alt_shortcode(text),
               rolint_title(path),
               rolint_headings(post_xml),
+              rolint_click_here(post_xml),
               rolint_figure_shortcode(post_xml),
               rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
@@ -42,13 +43,16 @@ ro_lint_md <- function(path) {
 
   if (length(issues) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
-    message(glue::glue_collapse(
+    msg <- glue::glue_collapse(
       c(paste("*", issues),
-        glue::glue("A bit more work is needed on {encourage}!")), sep = "\n\n"))
+        glue::glue("A bit more work is needed on {encourage}!")), sep = "\n\n")
   } else {
     good <- praise::praise("${exclamation}")
-    message(glue::glue("All good, {good}! :-)"))
+    msg <- glue::glue("All good, {good}! :-)")
   }
+
+  message(msg)
+  invisible(msg)
 
 }
 
@@ -166,7 +170,7 @@ rolint_tweet <- function(post_xml) {
   status <- paste0('{{< tweet "', status, '">}}')
   if(length(prob) > 0) {
     return(glue::glue(
-      "Use Hugo shortcodes to embed tweets, not Twitter html:\n {glue::glue_collapse(prob, sep = ',\n')}
+      "Use Hugo shortcodes to embed tweets, not Twitter html:\n <code>{glue::glue_collapse(prob, sep = ',\n')}</code>
        should be {glue::glue_collapse(status, sep = ',\n')}"))
   } else {
     return(NULL)
@@ -238,4 +242,17 @@ rolint_figure_shortcode <- function(post_xml) {
              .open = "[",
              .close = "]")
 
+}
+
+rolint_click_here <- function(post_xml) {
+
+  post_xml %>%
+    xml2::xml_find_all("//link") %>%
+    xml2::xml_text() -> link_text
+
+  if (any(trimws(tolower(link_text)) %in% c("click here", "here"))) {
+    return('Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here')
+  } else {
+    return(NULL)
+  }
 }
