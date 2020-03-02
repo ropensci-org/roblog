@@ -47,3 +47,10 @@ test_that("ro_lint_md finds figures not using shortcodes", {
 })
 
 
+test_that("ro_lint_md finds click here links", {
+  path <- system.file(file.path("examples", "clickhereissue.md"),
+                      package = "roblog")
+  testthat::expect_message(ro_lint_md(path), "click here")
+})
+
+
