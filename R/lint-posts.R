@@ -209,7 +209,7 @@ rolint_title <- function(path) {
   good_title <- snakecase::to_title_case(title)
 
   if (title != good_title) {
-    glue::glue("Use Title Case for the title i.e. {good_title}.")
+    glue::glue('Use Title Case for the title i.e. "{good_title}".')
   } else {
     return(NULL)
   }
