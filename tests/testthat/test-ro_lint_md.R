@@ -34,7 +34,7 @@ test_that("ro_lint_md finds title not in title case", {
   testthat::expect_message(ro_lint_md(path), "Title Case")
 })
 
-test_that("ro_lint_md finds headings not in sentence", {
+test_that("ro_lint_md finds headings not in sentence case", {
   path <- system.file(file.path("examples", "sentencecaseissue.md"),
                       package = "roblog")
   testthat::expect_message(ro_lint_md(path), "Sentence case")

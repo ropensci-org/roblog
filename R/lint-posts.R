@@ -204,7 +204,7 @@ rolint_title <- function(path) {
   good_title <- snakecase::to_title_case(title)
 
   if (title != good_title) {
-    glue::glue('Use Title Case for the title i.e. "{good_title}".')
+    glue::glue('Use Title Case for the title i.e. "{good_title}". (Ignore this note if the words are e.g. package names)')
   } else {
     return(NULL)
   }
@@ -221,7 +221,7 @@ rolint_headings <- function(post_xml) {
 
   if (any(headings != good_headings)) {
     good <- glue::glue('"{good_headings[headings != good_headings]}"')
-    glue::glue('Use Sentence case for headings i.e. {toString(good)}.')
+    glue::glue('Use Sentence case for headings i.e. {toString(good)}. (Ignore this note if the words are proper nouns)')
   } else {
     return(NULL)
   }
