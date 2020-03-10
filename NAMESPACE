@@ -2,8 +2,6 @@
 
 export("%>%")
 export(ro_blog_post_author)
-export(ro_blog_post_md)
-export(ro_blog_post_rmd)
 export(ro_check_urls)
 export(ro_lint_md)
 importFrom(magrittr,"%>%")
