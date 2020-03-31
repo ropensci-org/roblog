@@ -34,6 +34,7 @@ ro_lint_md <- function(path) {
 
   source_file <- srcfile(path)
   source_file$lines <- readLines(path)
+  source_file$to_add <- get_yaml_end(source_file$lines) - 1
 
   issues <- c(rolint_alt_shortcode(text),
               rolint_title(path),
@@ -227,16 +228,16 @@ rolint_headings <- function(post_xml, srcfile) {
 
   bad <- headings_nodes[headings != good_headings]
 
-  make_heading_lint <- function(heading_node) {
+  make_heading_lint <- function(heading_node, srcfile) {
     lintr::Lint(
         filename = srcfile$filename,
-        line_number = get_line(heading_node),
+        line_number = get_line(heading_node) + srcfile$to_add,
         column_number = get_col(heading_node),
         type = "style",
         message = glue::glue(
-          "Use Sentence case for headings i.e. {snakecase::to_sentence_case(xml2::xml_text(heading_node))}"
+          'Use Sentence case for headings i.e. "{snakecase::to_sentence_case(xml2::xml_text(heading_node))}"'
           ),
-        line = srcfile$lines[get_line(heading_node)],
+        line = srcfile$lines[get_line(heading_node) + srcfile$to_add],
         linter = "sentence_case_headings_linter"
     )
   }
