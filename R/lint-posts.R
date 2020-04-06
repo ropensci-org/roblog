@@ -35,28 +35,33 @@ ro_lint_md <- function(path) {
   source_file <- srcfile(path)
   source_file$lines <- readLines(path)
   source_file$to_add <- get_yaml_end(source_file$lines) - 1
+  source_file$post_xml <- post_xml
 
-  issues <- c(rolint_alt_shortcode(text),
-              rolint_title(path),
-              rolint_headings(post_xml, source_file),
-              rolint_click_here(post_xml),
-              rolint_figure_shortcode(post_xml),
-              rolint_ropensci(post_xml),
-              rolint_tweet(post_xml),
-              rolint_absolute_links(post_xml))
+  lints <- c(rolint_alt_shortcode(source_file),
+              rolint_title(source_file),
+             sentence_case_headings_linter(source_file),
+              rolint_click_here(source_file),
+              rolint_figure_shortcode(source_file),
+              rolint_ropensci(source_file),
+              rolint_tweet(source_file),
+              rolint_absolute_links(source_file))
 
-  if (length(issues) > 0) {
+  if (length(lints) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
     msg <- glue::glue_collapse(
       c(paste("*", issues),
         glue::glue("A bit more work is needed on {encourage}!")), sep = "\n\n")
+    lints <- structure(lintr:::reorder_lints(
+      lintr:::flatten_lints(lints)), class = "lints")
+    message(msg)
+    return(lints)
   } else {
     good <- praise::praise("${exclamation}")
     msg <- glue::glue("All good, {good}! :-)")
+    message(msg)
+    return(NULL)
   }
 
-  message(msg)
-  invisible(msg)
 
 }
 
@@ -215,44 +220,7 @@ rolint_title <- function(path) {
 
 }
 
-rolint_headings <- function(post_xml, srcfile) {
 
-  headings_nodes <- xml2::xml_find_all(
-    post_xml,
-    "//heading"
-    )
-
-  headings <- xml2::xml_text(headings_nodes)
-
-  good_headings <- snakecase::to_sentence_case(headings)
-
-  bad <- headings_nodes[headings != good_headings]
-
-  make_heading_lint <- function(heading_node, srcfile) {
-    lintr::Lint(
-        filename = srcfile$filename,
-        line_number = get_line(heading_node) + srcfile$to_add,
-        column_number = get_col(heading_node),
-        type = "style",
-        message = glue::glue(
-          'Use Sentence case for headings i.e. "{snakecase::to_sentence_case(xml2::xml_text(heading_node))}"'
-          ),
-        line = srcfile$lines[get_line(heading_node) + srcfile$to_add],
-        linter = "sentence_case_headings_linter"
-    )
-  }
-  browser()
-  lints <- lapply(
-    headings_nodes[headings != good_headings],
-  )
-
-  if (any(headings != good_headings)) {
-    good <- glue::glue('"{good_headings[headings != good_headings]}"')
-    glue::glue('Use Sentence case for headings i.e. {toString(good)}. (Ignore this note if the words are proper nouns)')
-  } else {
-    return(NULL)
-  }
-}
 
 rolint_figure_shortcode <- function(post_xml) {
 

@@ -19,7 +19,7 @@ get_line <- function(node) {
     "\\:.*", "",
     xml2::xml_attr(node, "sourcepos")
     )
-  )
+  ) + 1
 
 }
 
