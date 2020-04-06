@@ -125,42 +125,29 @@ rectangle_shortcode <- function(line) {
                         " [a-z]* "), "", line)
   params <- gsub(shortcode_pattern_end(), "", params)
 
-  param_names <- stringr::str_extract_all(params,
-                                          "[a-z]*.?\\=.?",
-                                          simplify = TRUE)[1,]
 
-  params_df <- purrr::map_df(param_names, get_option, params)
-
-  if ( nrow(params_df) == 0) {
+  if ( !grepl("\\=", params)) {
     return(tibble::tibble(name = name,
                           shortcode = line))
   }
 
-  params_df$name <- name
-  params_df$shortcode <- line
-  params_df
-
-}
-
-get_option <- function(param_name, params) {
-
-  if (grepl("alt", param_name)) {
-    stringr::str_extract(paste0(params, " "),
-                         paste0(param_name, '\\".*\\"? ')) %>%
-      stringr::str_remove(param_name) %>%
-      trimws() -> param_value
+  splitted <- trimws(unlist(strsplit(params, "=")))
+  if (length(splitted) == 2){
+    param_values <- splitted[2]
+    param_names <- splitted[1]
   } else {
-    stringr::str_extract(paste0(params, " "),
-                         paste0(param_name, ".*? ")) %>%
-      stringr::str_remove(param_name) %>%
-      trimws() -> param_value
+    param_values <- stringr::str_remove(splitted[2:length(splitted)], "\\w+$")
+    param_names <- c(splitted[1],
+                     stringr::str_extract(splitted[2:(length(splitted)-1)], "\\w+$"))
   }
 
+  tibble::tibble(param_name = param_names,
+                 param_value = param_values,
+                 name = name,
+                 shortcode = line)
 
-
-  tibble::tibble(param_name = trimws(gsub("\\=", "", param_name)),
-                 param_value = param_value)
 }
+
 rolint_tweet <- function(post_xml) {
   nodes <- xml2::xml_children(post_xml)
   prob <- xml2::xml_text(
