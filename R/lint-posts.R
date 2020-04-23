@@ -188,7 +188,7 @@ rolint_absolute_links <- function(post_xml) {
 rolint_title <- function(path) {
   title <- yaml::yaml.load(readLines(path)[1:10])$title
 
-  good_title <- snakecase::to_title_case(title)
+  good_title <- snakecase::to_title_case(title, sep_in = " ")
 
   if (title != good_title) {
     glue::glue('Use Title Case for the title i.e. "{good_title}". (Ignore this note if the words are e.g. package names)')
@@ -204,7 +204,8 @@ rolint_headings <- function(post_xml) {
     xml2::xml_find_all("//heading") %>%
     xml2::xml_text() -> headings
 
-  good_headings <- snakecase::to_sentence_case(headings)
+  good_headings <- snakecase::to_sentence_case(headings,
+                                               sep_in = " ")
 
   if (any(headings != good_headings)) {
     good <- glue::glue('"{good_headings[headings != good_headings]}"')
