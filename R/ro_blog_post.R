@@ -4,7 +4,7 @@
 #'
 #' @export
 #'
-#' @details Call them via the add-in or directly or get the [templates online](https://ropensci-org.github.io/blog-guidance/templatemd.html).
+#' @details Call it via the add-in or directly or get the [templates online](https://ropensci-org.github.io/blog-guidance/templatemd.html).
 #'
 #' In any case, an internet connection is required as templates are downloaded
 #' fresh from their source
