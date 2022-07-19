@@ -4,10 +4,11 @@
 \alias{ro_check_urls}
 \title{Check URLs in Markdown post}
 \usage{
-ro_check_urls(path)
+ro_check_urls(path = NULL)
 }
 \arguments{
-\item{path}{Path to the Markdown post (not source Rmd!)}
+\item{path}{Path to the Markdown post (not source Rmd!) --
+if \code{NULL}, and in RStudio, roblog will default to the md resulting from the active Rmd.}
 }
 \description{
 Check URLs in Markdown post

@@ -10,7 +10,7 @@ shortcode_pattern_end <- function() {
 
 #' Lint Markdown post for rOpenSci blog
 #'
-#' @param path Path to the Markdown post (not source Rmd!)
+#' @inheritParams ro_check_urls
 #'
 #' @export
 #'
@@ -18,7 +18,12 @@ shortcode_pattern_end <- function() {
 #' path <- system.file(file.path("examples", "bad-no-alt.md"),
 #'                     package = "roblog")
 #' }
-ro_lint_md <- function(path) {
+ro_lint_md <- function(path = NULL) {
+
+  if (is.null(path) && rstudioapi::isAvailable()) {
+    path <- rstudioapi::documentPath() %>%
+      fs::path_ext_set("md")
+  }
 
   if (!file.exists(path)) {
     stop(glue::glue("The file {path} does not exist, did you make a typo?"))

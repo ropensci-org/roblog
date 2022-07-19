@@ -10,7 +10,7 @@ ro_blog_post_author()
 Create a new author file, in RStudio.
 }
 \details{
-Call them via the add-in or directly or get the \href{https://ropensci-org.github.io/blog-guidance/templatemd.html}{templates online}.
+Call it via the add-in or directly or get the \href{https://ropensci-org.github.io/blog-guidance/templatemd.html}{templates online}.
 
 In any case, an internet connection is required as templates are downloaded
 fresh from their source

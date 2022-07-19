@@ -1,6 +1,7 @@
 #' Check URLs in Markdown post
 #'
-#' @param path Path to the Markdown post (not source Rmd!)
+#' @param path Path to the Markdown post (not source Rmd!) --
+#'  if `NULL`, and in RStudio, roblog will default to the md resulting from the active Rmd.
 #'
 #' @export
 #'
@@ -9,7 +10,12 @@
 #'                     package = "roblog")
 #' ro_check_urls(path)
 #' }
-ro_check_urls <- function(path) {
+ro_check_urls <- function(path = NULL) {
+
+  if (is.null(path) && rstudioapi::isAvailable()) {
+    path <- rstudioapi::documentPath() %>%
+      fs::path_ext_set("md")
+  }
 
   text <- try(readLines(path), silent = TRUE)
 
