@@ -31,15 +31,28 @@ ro_check_urls <- function(path = NULL) {
 
   urls <- urls[grepl("http", urls)]
 
-  df <- tibble::tibble(url = urls,
-                 ok = purrr::map_lgl(urls, crul::ok,
-                                     verb = "get"))
+  df <- tibble::tibble(
+    url = urls,
+    ok = purrr::map_lgl(urls, crul::ok, verb = "get")
+  )
   notok <- df$url[!df$ok]
 
-  if (length(notok) == 0) {
-    message("URLs ok!")
-  } else {
+  http_not_https <- urls[grepl("http\\:", urls)]
+  df2 <- tibble::tibble(
+    url = http_not_https,
+    ok = purrr::map_lgl(sub("http", "https", http_not_https), crul::ok, verb = "get")
+  )
+  replaceable <- df2$url[df2$ok]
+
+  if ((length(notok) > 0)) {
     message(glue::glue("Possibly broken URLs: {glue::glue_collapse(notok, sep = ', ')}."))
   }
 
+  if ((length(replaceable) > 0)) {
+    message(glue::glue("Replace http with https for: {glue::glue_collapse(replaceable, sep = ', ')}."))
+  }
+
+  if ((length(notok) == 0) && (length(replaceable) == 0)) {
+  message("URLs ok!")
+  }
 }
