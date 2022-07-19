@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 .ropensci-staff
+^\.github$
