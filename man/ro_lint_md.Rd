@@ -4,10 +4,11 @@
 \alias{ro_lint_md}
 \title{Lint Markdown post for rOpenSci blog}
 \usage{
-ro_lint_md(path)
+ro_lint_md(path = NULL)
 }
 \arguments{
-\item{path}{Path to the Markdown post (not source Rmd!)}
+\item{path}{Path to the Markdown post (not source Rmd!) --
+if \code{NULL}, and in RStudio, roblog will default to the md resulting from the active Rmd.}
 }
 \description{
 Lint Markdown post for rOpenSci blog

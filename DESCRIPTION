@@ -36,9 +36,7 @@ Imports:
     dplyr,
     fs,
     gh,
-    git2r,
     glue,
-    hrbrthemes,
     magrittr,
     praise,
     purrr,
@@ -47,7 +45,6 @@ Imports:
     snakecase,
     stringr,
     tibble,
-    tidytext,
     xml2,
     yaml
 Suggests: 
@@ -63,4 +60,4 @@ Remotes:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.2.0.9000
