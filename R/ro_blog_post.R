@@ -16,6 +16,9 @@
 #' @export
 ro_blog_post_author <- function() {
   txt <- get_tmpl("author-file-template.md")
+  author_name <- whoami::fullname(fallback = "Your Name")
+  github_username <- whoami::gh_username(fallback = "GitHub username")
+  orcid_id <- Sys.getenv("ORCID_ID", "your orcid ID")
   rstudioapi::documentNew(
     txt,
     type = "rmarkdown")
