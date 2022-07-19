@@ -31,6 +31,7 @@ URL: https://docs.ropensci.org/roblog/,
     https://github.com/ropenscilabs/roblog
 BugReports: https://github.com/ropenscilabs/roblog/issues
 Imports: 
+    base64enc,
     commonmark,
     crul (>= 0.9.1.9992),
     dplyr,
@@ -45,6 +46,7 @@ Imports:
     snakecase,
     stringr,
     tibble,
+    whoami,
     xml2,
     yaml
 Suggests: 
