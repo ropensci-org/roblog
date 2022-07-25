@@ -46,3 +46,12 @@ test_that("ro_lint_md finds click here links", {
   withr::local_seed(42)
   expect_snapshot(ro_lint_md(path))
 })
+
+
+test_that("ro_lint_md with multiple problems", {
+  path <- system.file(file.path("examples", "multi-bad.md"),
+    package = "roblog"
+  )
+  withr::local_seed(42)
+  expect_snapshot(ro_lint_md(path))
+})

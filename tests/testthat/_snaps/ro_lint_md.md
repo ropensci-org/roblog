@@ -53,3 +53,14 @@
       i A bit more work is needed on this kickass post draft!
       * Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here
 
+# ro_lint_md with multiple problems
+
+    Code
+      ro_lint_md(path)
+    Message <rlang_message>
+      i A bit more work is needed on this kickass post draft!
+      * Alternative image description missing or too short for:
+        {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" alt = "too short">},
+        {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200">}.
+      * Please replace absolute links with relative links: https://ropensci.org/blog should become /blog.
+
