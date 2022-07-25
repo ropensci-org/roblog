@@ -45,6 +45,7 @@ Imports:
     rstudioapi,
     stringr,
     tibble,
+    usethis,
     whoami,
     xml2
 Suggests: 

@@ -48,20 +48,16 @@ ro_lint_md <- function(path = NULL) {
 
   if (length(issues) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
-    msg <- glue::glue_collapse(
-      c(
-        paste("*", issues),
-        glue::glue("A bit more work is needed on {encourage}!")
-      ),
-      sep = "\n\n"
+    usethis::ui_info(glue::glue("A bit more work is needed on {encourage}!"))
+    purrr::walk(
+      issues,
+      usethis::ui_todo
     )
   } else {
     good <- praise::praise("${exclamation}")
-    msg <- glue::glue("All good, {good}! :-)")
+    msg <- usethis::ui_done(glue::glue("All good, {good}! :-)"))
   }
 
-  message(msg)
-  invisible(msg)
 }
 
 rolint_alt_shortcode <- function(text) {
