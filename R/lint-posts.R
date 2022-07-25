@@ -38,11 +38,8 @@ ro_lint_md <- function(path = NULL) {
   post_xml <- get_xml(text)
 
   issues <- c(rolint_alt_shortcode(text),
-              rolint_title(path),
-              rolint_headings(post_xml),
               rolint_click_here(post_xml),
               rolint_figure_shortcode(post_xml),
-              rolint_ropensci(post_xml),
               rolint_tweet(post_xml),
               rolint_absolute_links(post_xml))
 
@@ -60,23 +57,6 @@ ro_lint_md <- function(path = NULL) {
   invisible(msg)
 
 }
-
-rolint_ropensci <- function(post_xml){
-  text <- xml2::xml_text(xml2::xml_children(post_xml))
-  text <- glue::glue_collapse(text, sep = " ")
-  problems <- trimws(
-    unlist(regmatches(text, gregexpr("ropensci[ \\.\\,\\;\\!\\?\\-\\:]",
-                                               text, ignore.case = TRUE))))
-  problems <- sub("\\.", "", problems)
-  problems <- problems[problems != "rOpenSci"]
-
-  if (length(problems) == 0) {
-    return(NULL)
-  } else {
-    glue::glue("Please write rOpenSci in lower camelCase, not: {glue::glue_collapse(problems, sep = ', ')}.")
-  }
-}
-
 
 rolint_alt_shortcode <- function(text){
   text %>%
@@ -188,36 +168,6 @@ rolint_absolute_links <- function(post_xml) {
     return(NULL)
   }
 
-}
-
-rolint_title <- function(path) {
-  title <- yaml::yaml.load(readLines(path)[1:10])$title
-
-  good_title <- snakecase::to_title_case(title, sep_in = " ")
-
-  if (title != good_title) {
-    glue::glue('Use Title Case for the title i.e. "{good_title}". (Ignore this note if the words are e.g. package names)')
-  } else {
-    return(NULL)
-  }
-
-}
-
-rolint_headings <- function(post_xml) {
-
-  post_xml %>%
-    xml2::xml_find_all("//heading") %>%
-    xml2::xml_text() -> headings
-
-  good_headings <- snakecase::to_sentence_case(headings,
-                                               sep_in = " ")
-
-  if (any(headings != good_headings)) {
-    good <- glue::glue('"{good_headings[headings != good_headings]}"')
-    glue::glue('Use Sentence case for headings i.e. {toString(good)}. (Ignore this note if the words are proper nouns)')
-  } else {
-    return(NULL)
-  }
 }
 
 rolint_figure_shortcode <- function(post_xml) {
