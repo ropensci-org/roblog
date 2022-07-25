@@ -7,11 +7,11 @@
 #'
 #' @examples \dontrun{
 #' path <- system.file(file.path("examples", "bad-no-alt.md"),
-#'                     package = "roblog")
+#'   package = "roblog"
+#' )
 #' ro_check_urls(path)
 #' }
 ro_check_urls <- function(path = NULL) {
-
   if (is.null(path) && rstudioapi::isAvailable()) {
     path <- rstudioapi::documentPath() %>%
       fs::path_ext_set("md")
@@ -53,6 +53,6 @@ ro_check_urls <- function(path = NULL) {
   }
 
   if ((length(notok) == 0) && (length(replaceable) == 0)) {
-  message("URLs ok!")
+    message("URLs ok!")
   }
 }

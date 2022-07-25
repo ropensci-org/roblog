@@ -21,5 +21,6 @@ ro_blog_post_author <- function() {
   orcid_id <- Sys.getenv("ORCID_ID", "your orcid ID")
   rstudioapi::documentNew(
     txt,
-    type = "rmarkdown")
+    type = "rmarkdown"
+  )
 }

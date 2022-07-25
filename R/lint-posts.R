@@ -15,11 +15,12 @@ shortcode_pattern_end <- function() {
 #' @export
 #'
 #' @examples \dontrun{
-#' path <- system.file(file.path("examples", "bad-no-alt.md"),
-#'                     package = "roblog")
+#' path <- system.file(
+#'   file.path("examples", "bad-no-alt.md"),
+#'   package = "roblog"
+#' )
 #' }
 ro_lint_md <- function(path = NULL) {
-
   if (is.null(path) && rstudioapi::isAvailable()) {
     path <- rstudioapi::documentPath() %>%
       fs::path_ext_set("md")
@@ -37,17 +38,23 @@ ro_lint_md <- function(path = NULL) {
 
   post_xml <- get_xml(text)
 
-  issues <- c(rolint_alt_shortcode(text),
-              rolint_click_here(post_xml),
-              rolint_figure_shortcode(post_xml),
-              rolint_tweet(post_xml),
-              rolint_absolute_links(post_xml))
+  issues <- c(
+    rolint_alt_shortcode(text),
+    rolint_click_here(post_xml),
+    rolint_figure_shortcode(post_xml),
+    rolint_tweet(post_xml),
+    rolint_absolute_links(post_xml)
+  )
 
   if (length(issues) > 0) {
     encourage <- praise::praise("this ${adjective} post draft")
     msg <- glue::glue_collapse(
-      c(paste("*", issues),
-        glue::glue("A bit more work is needed on {encourage}!")), sep = "\n\n")
+      c(
+        paste("*", issues),
+        glue::glue("A bit more work is needed on {encourage}!")
+      ),
+      sep = "\n\n"
+    )
   } else {
     good <- praise::praise("${exclamation}")
     msg <- glue::glue("All good, {good}! :-)")
@@ -55,10 +62,9 @@ ro_lint_md <- function(path = NULL) {
 
   message(msg)
   invisible(msg)
-
 }
 
-rolint_alt_shortcode <- function(text){
+rolint_alt_shortcode <- function(text) {
   text %>%
     rectangle_shortcodes() -> sc
 
@@ -70,15 +76,17 @@ rolint_alt_shortcode <- function(text){
     dplyr::filter(.data$name == "figure") %>%
     dplyr::group_by(.data$shortcode) -> df
 
-  if(nrow(df) == 0) {
+  if (nrow(df) == 0) {
     return(NULL)
   }
 
   df %>%
     dplyr::filter(.data$param_name == "alt") %>%
     # https://stackoverflow.com/questions/8920145/count-the-number-of-all-words-in-a-string
-    dplyr::mutate(param_value = gsub('\"', "", .data$param_value),
-                  alt_length = lengths(gregexpr("\\W+", .data$param_value)) + 1) %>%
+    dplyr::mutate(
+      param_value = gsub('\"', "", .data$param_value),
+      alt_length = lengths(gregexpr("\\W+", .data$param_value)) + 1
+    ) %>%
     dplyr::filter(.data$alt_length < 3) -> df1
 
   df %>%
@@ -95,55 +103,71 @@ rolint_alt_shortcode <- function(text){
 }
 
 rectangle_shortcodes <- function(text) {
-  shortcodes <- text[grepl(paste0(".*", shortcode_pattern_start()),
-                                  text)]
+  shortcodes <- text[grepl(
+    paste0(".*", shortcode_pattern_start()),
+    text
+  )]
   purrr::map_df(shortcodes, rectangle_shortcode)
 }
 
 rectangle_shortcode <- function(line) {
   name <- trimws(
-    gsub(shortcode_pattern_start(), "",
-               regmatches(line, regexec(paste0(shortcode_pattern_start(),
-                                               " [a-z]* "), line))))
+    gsub(
+      shortcode_pattern_start(), "",
+      regmatches(line, regexec(paste0(
+        shortcode_pattern_start(),
+        " [a-z]* "
+      ), line))
+    )
+  )
 
-  params <- gsub(paste0(shortcode_pattern_start(),
-                        " [a-z]* "), "", line)
+  params <- gsub(paste0(
+    shortcode_pattern_start(),
+    " [a-z]* "
+  ), "", line)
   params <- gsub(shortcode_pattern_end(), "", params)
 
 
-  if ( !grepl("\\=", params)) {
-    return(tibble::tibble(name = name,
-                          shortcode = line))
+  if (!grepl("\\=", params)) {
+    return(tibble::tibble(
+      name = name,
+      shortcode = line
+    ))
   }
 
   splitted <- trimws(unlist(strsplit(params, "=")))
-  if (length(splitted) == 2){
+  if (length(splitted) == 2) {
     param_values <- splitted[2]
     param_names <- splitted[1]
   } else {
     param_values <- stringr::str_remove(splitted[2:length(splitted)], "\\w+$")
-    param_names <- c(splitted[1],
-                     stringr::str_extract(splitted[2:(length(splitted)-1)], "\\w+$"))
+    param_names <- c(
+      splitted[1],
+      stringr::str_extract(splitted[2:(length(splitted) - 1)], "\\w+$")
+    )
   }
 
-  tibble::tibble(param_name = param_names,
-                 param_value = param_values,
-                 name = name,
-                 shortcode = line)
-
+  tibble::tibble(
+    param_name = param_names,
+    param_value = param_values,
+    name = name,
+    shortcode = line
+  )
 }
 
 rolint_tweet <- function(post_xml) {
   nodes <- xml2::xml_children(post_xml)
   prob <- xml2::xml_text(
-    nodes[grepl('<blockquote class="twitter-tweet">', xml2::xml_text(nodes))])
+    nodes[grepl('<blockquote class="twitter-tweet">', xml2::xml_text(nodes))]
+  )
   status <- stringr::str_extract(prob, "status\\/[0-9]*") %>%
     stringr::str_remove("status\\/")
   status <- paste0('{{< tweet "', status, '">}}')
-  if(length(prob) > 0) {
+  if (length(prob) > 0) {
     return(glue::glue(
       "Use Hugo shortcodes to embed tweets, not Twitter html:\n <code>{glue::glue_collapse(prob, sep = ',\n')}</code>
-       should be {glue::glue_collapse(status, sep = ',\n')}"))
+       should be {glue::glue_collapse(status, sep = ',\n')}"
+    ))
   } else {
     return(NULL)
   }
@@ -167,11 +191,9 @@ rolint_absolute_links <- function(post_xml) {
   } else {
     return(NULL)
   }
-
 }
 
 rolint_figure_shortcode <- function(post_xml) {
-
   post_xml %>%
     xml2::xml_find_all("//image") -> images
 
@@ -181,14 +203,13 @@ rolint_figure_shortcode <- function(post_xml) {
 
   dest <- xml2::xml_attr(images, "destination")
 
-  glue::glue('Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage',
-             .open = "[",
-             .close = "]")
-
+  glue::glue("Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage",
+    .open = "[",
+    .close = "]"
+  )
 }
 
 rolint_click_here <- function(post_xml) {
-
   post_xml %>%
     xml2::xml_find_all("//link") %>%
     xml2::xml_text() -> link_text

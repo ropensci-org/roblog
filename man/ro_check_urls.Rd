@@ -16,7 +16,8 @@ Check URLs in Markdown post
 \examples{
 \dontrun{
 path <- system.file(file.path("examples", "bad-no-alt.md"),
-                    package = "roblog")
+  package = "roblog"
+)
 ro_check_urls(path)
 }
 }

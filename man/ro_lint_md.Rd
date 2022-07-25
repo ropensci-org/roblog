@@ -15,7 +15,9 @@ Lint Markdown post for rOpenSci blog
 }
 \examples{
 \dontrun{
-path <- system.file(file.path("examples", "bad-no-alt.md"),
-                    package = "roblog")
+path <- system.file(
+  file.path("examples", "bad-no-alt.md"),
+  package = "roblog"
+)
 }
 }
