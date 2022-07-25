@@ -39,7 +39,6 @@ Imports:
     gh,
     glue,
     magrittr,
-    praise,
     purrr,
     rlang,
     rstudioapi,
