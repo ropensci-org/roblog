@@ -45,14 +45,14 @@ ro_check_urls <- function(path = NULL) {
   replaceable <- df2$url[df2$ok]
 
   if ((length(notok) > 0)) {
-    message(glue::glue("Possibly broken URLs: {glue::glue_collapse(notok, sep = ', ')}."))
+    usethis::ui_todo(glue::glue("Possibly broken URLs: {glue::glue_collapse(notok, sep = ', ')}."))
   }
 
   if ((length(replaceable) > 0)) {
-    message(glue::glue("Replace http with https for: {glue::glue_collapse(replaceable, sep = ', ')}."))
+    usethis::ui_todo(glue::glue("Replace http with https for: {glue::glue_collapse(replaceable, sep = ', ')}."))
   }
 
   if ((length(notok) == 0) && (length(replaceable) == 0)) {
-    message("URLs ok!")
+    usethis::ui_done("URLs ok!")
   }
 }

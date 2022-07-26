@@ -4,4 +4,11 @@ test_that("ro_check_urls works", {
     package = "roblog"
   )
   testthat::expect_snapshot(ro_check_urls(path))
+  path <- system.file(
+    file.path("examples", "clickhereissue.md"),
+    package = "roblog"
+  )
+  testthat::expect_snapshot(ro_check_urls(path))
 })
+
+
