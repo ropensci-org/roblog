@@ -51,7 +51,7 @@ rolint_alt_shortcode <- function(text) {
     rectangle_shortcodes() -> sc
 
   if (!"shortcode" %in% names(sc)) {
-    usethis::ui_done("Detected no alternative text obvious problem.")
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
     return(NULL)
   }
 
@@ -80,10 +80,10 @@ rolint_alt_shortcode <- function(text) {
 
   if (nrow(df3)) {
     usethis::ui_todo(
-      glue::glue("Alternative image description missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+      glue::glue("Alternative (alt) text missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
     )
   } else {
-    usethis::ui_done("Detected no alternative text obvious problem.")
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
   }
 }
 
@@ -154,7 +154,7 @@ rolint_tweet <- function(post_xml) {
        should be {glue::glue_collapse(status, sep = ',\n')}"
     ))
   } else {
-    usethis::ui_done("Found no wrongly embedded tweets.")
+    usethis::ui_done("Found no incorrectly embedded tweets.")
   }
 }
 
@@ -186,6 +186,7 @@ rolint_figure_shortcode <- function(post_xml) {
 
   if (length(images) == 0) {
     usethis::ui_done("Found no image not using the Hugo figure shortcode.")
+    return(NULL)
   }
 
   dest <- xml2::xml_attr(images, "destination")
