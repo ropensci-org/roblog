@@ -60,6 +60,7 @@ rolint_alt_shortcode <- function(text) {
     dplyr::group_by(.data$shortcode) -> df
 
   if (nrow(df) == 0) {
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
     return(NULL)
   }
 
