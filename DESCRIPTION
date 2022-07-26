@@ -40,13 +40,13 @@ Imports:
     gh,
     glue,
     magrittr,
-    praise,
     purrr,
     rlang,
     rstudioapi,
     stringr,
     textutils,
     tibble,
+    usethis,
     whoami,
     xml2
 Suggests: 

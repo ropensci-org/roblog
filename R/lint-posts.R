@@ -38,30 +38,12 @@ ro_lint_md <- function(path = NULL) {
 
   post_xml <- get_xml(text)
 
-  issues <- c(
-    rolint_alt_shortcode(text),
-    rolint_click_here(post_xml),
-    rolint_figure_shortcode(post_xml),
-    rolint_tweet(post_xml),
-    rolint_absolute_links(post_xml)
-  )
+  rolint_alt_shortcode(text)
+  rolint_click_here(post_xml)
+  rolint_figure_shortcode(post_xml)
+  rolint_tweet(post_xml)
+  rolint_absolute_links(post_xml)
 
-  if (length(issues) > 0) {
-    encourage <- praise::praise("this ${adjective} post draft")
-    msg <- glue::glue_collapse(
-      c(
-        paste("*", issues),
-        glue::glue("A bit more work is needed on {encourage}!")
-      ),
-      sep = "\n\n"
-    )
-  } else {
-    good <- praise::praise("${exclamation}")
-    msg <- glue::glue("All good, {good}! :-)")
-  }
-
-  message(msg)
-  invisible(msg)
 }
 
 rolint_alt_shortcode <- function(text) {
@@ -69,6 +51,7 @@ rolint_alt_shortcode <- function(text) {
     rectangle_shortcodes() -> sc
 
   if (!"shortcode" %in% names(sc)) {
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
     return(NULL)
   }
 
@@ -77,6 +60,7 @@ rolint_alt_shortcode <- function(text) {
     dplyr::group_by(.data$shortcode) -> df
 
   if (nrow(df) == 0) {
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
     return(NULL)
   }
 
@@ -96,9 +80,11 @@ rolint_alt_shortcode <- function(text) {
 
 
   if (nrow(df3)) {
-    glue::glue("Alternative image description missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+    usethis::ui_todo(
+      glue::glue("Alternative (alt) text missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+    )
   } else {
-    NULL
+    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
   }
 }
 
@@ -164,12 +150,12 @@ rolint_tweet <- function(post_xml) {
     stringr::str_remove("status\\/")
   status <- paste0('{{< tweet "', status, '">}}')
   if (length(prob) > 0) {
-    return(glue::glue(
+    usethis::ui_todo(glue::glue(
       "Use Hugo shortcodes to embed tweets, not Twitter html:\n <code>{glue::glue_collapse(prob, sep = ',\n')}</code>
        should be {glue::glue_collapse(status, sep = ',\n')}"
     ))
   } else {
-    return(NULL)
+    usethis::ui_done("Found no incorrectly embedded tweets.")
   }
 }
 
@@ -187,9 +173,11 @@ rolint_absolute_links <- function(post_xml) {
     absolute_links <- glue::glue_collapse(absolute_links, sep = ", ")
     relative_links <- glue::glue_collapse(relative_links, sep = ", ")
 
-    glue::glue("Please replace absolute links with relative links: {absolute_links} should become {relative_links}.")
+    usethis::ui_todo(
+      glue::glue("Please replace absolute links with relative links: {absolute_links} should become {relative_links}.")
+    )
   } else {
-    return(NULL)
+    usethis::ui_done("Found no absolute links to rOpenSci website.")
   }
 }
 
@@ -198,14 +186,17 @@ rolint_figure_shortcode <- function(post_xml) {
     xml2::xml_find_all("//image") -> images
 
   if (length(images) == 0) {
+    usethis::ui_done("Found no image not using the Hugo figure shortcode.")
     return(NULL)
   }
 
   dest <- xml2::xml_attr(images, "destination")
 
-  glue::glue("Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage",
-    .open = "[",
-    .close = "]"
+  usethis::ui_todo(
+    glue::glue("Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage",
+      .open = "[",
+      .close = "]"
+    )
   )
 }
 
@@ -215,8 +206,8 @@ rolint_click_here <- function(post_xml) {
     xml2::xml_text() -> link_text
 
   if (any(trimws(tolower(link_text)) %in% c("click here", "here"))) {
-    return('Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here')
+    usethis::ui_todo('Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here')
   } else {
-    return(NULL)
+    usethis::ui_done("Found no 'click here' links.")
   }
 }
