@@ -48,7 +48,8 @@ Imports:
     tibble,
     usethis,
     whoami,
-    xml2
+    xml2,
+    xmlparsedata
 Suggests: 
     details,
     gluedown,
