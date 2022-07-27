@@ -43,6 +43,7 @@ ro_lint_md <- function(path = NULL) {
   rolint_figure_shortcode(post_xml)
   rolint_tweet(post_xml)
   rolint_absolute_links(post_xml)
+  rolint_r_code(post_xml)
 
 }
 
@@ -52,7 +53,7 @@ rolint_alt_shortcode <- function(text) {
 
   if (!"shortcode" %in% names(sc)) {
     usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
-    return(NULL)
+    return(invisible(NULL))
   }
 
   sc %>%
@@ -61,7 +62,7 @@ rolint_alt_shortcode <- function(text) {
 
   if (nrow(df) == 0) {
     usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
-    return(NULL)
+    return(invisible(NULL))
   }
 
   df %>%
@@ -187,7 +188,7 @@ rolint_figure_shortcode <- function(post_xml) {
 
   if (length(images) == 0) {
     usethis::ui_done("Found no image not using the Hugo figure shortcode.")
-    return(NULL)
+    return(invisible(NULL))
   }
 
   dest <- xml2::xml_attr(images, "destination")
@@ -210,4 +211,39 @@ rolint_click_here <- function(post_xml) {
   } else {
     usethis::ui_done("Found no 'click here' links.")
   }
+}
+
+rolint_r_code <- function(post_xml) {
+  code_blocks <- post_xml %>%
+    xml2::xml_find_all("//code_block[@info='r']")
+
+  if (length(code_blocks) == 0) {
+    usethis::ui_done("Found no code style problem.")
+    return(invisible(NULL))
+  }
+
+  code <- xml2::xml_text(code_blocks) %>%
+    parse(
+    text = .,
+    keep.source = TRUE
+  ) %>%
+    xmlparsedata::xml_parse_data(pretty = TRUE) %>%
+    xml2::read_xml()
+
+  functions <- xml2::xml_find_all(code, "//SYMBOL_FUNCTION_CALL")
+  function_names <- xml2::xml_text(functions)
+
+  if (all(function_names != "require")) {
+    usethis::ui_done("Found no code style problem.")
+  } else {
+    require_calls <- functions[function_names == "require"]
+    require_calls_text <- xml2::xml_text(xml2::xml_parent(xml2::xml_parent(require_calls)))
+    usethis::ui_todo(
+      sprintf(
+        "Use `library()` instead of `require()` in %s.",
+        toString(sprintf("`%s`", require_calls_text))
+      )
+    )
+  }
+
 }

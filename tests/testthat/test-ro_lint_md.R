@@ -47,7 +47,21 @@ test_that("ro_lint_md finds click here links", {
   expect_snapshot(ro_lint_md(path))
 })
 
+test_that("ro_lint_md for code", {
+  path <- system.file(file.path("examples", "require.md"),
+    package = "roblog"
+  )
 
+  expect_snapshot(ro_lint_md(path))
+})
+
+test_that("ro_lint_md for code no functions", {
+  path <- system.file(file.path("examples", "code-no-functions.md"),
+    package = "roblog"
+  )
+
+  expect_snapshot(ro_lint_md(path))
+})
 test_that("ro_lint_md with multiple problems", {
   path <- system.file(file.path("examples", "multi-bad.md"),
     package = "roblog"

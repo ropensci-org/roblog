@@ -8,6 +8,7 @@
       v Found no image not using the Hugo figure shortcode.
       v Found no incorrectly embedded tweets.
       v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
 
 # ro_lint_md find alt issues
 
@@ -21,6 +22,7 @@
       v Found no image not using the Hugo figure shortcode.
       v Found no incorrectly embedded tweets.
       v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
 
 # ro_lint_md find embedded tweets issues
 
@@ -38,6 +40,7 @@
                should be {< tweet "1200040510540386304">},
         {< tweet "969442252610191361">}
       v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
 
 # ro_lint_md finds absolute links
 
@@ -49,6 +52,7 @@
       v Found no image not using the Hugo figure shortcode.
       v Found no incorrectly embedded tweets.
       * Please replace absolute links with relative links: https://ropensci.org/blog should become /blog.
+      v Found no code style problem.
 
 # ro_lint_md finds figures not using shortcodes
 
@@ -60,6 +64,7 @@
       * Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage
       v Found no incorrectly embedded tweets.
       v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
 
 # ro_lint_md finds click here links
 
@@ -71,6 +76,31 @@
       v Found no image not using the Hugo figure shortcode.
       v Found no incorrectly embedded tweets.
       v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
+
+# ro_lint_md for code
+
+    Code
+      ro_lint_md(path)
+    Message <rlang_message>
+      v Detected no obvious problems with alternative (alt) text.
+      v Found no 'click here' links.
+      v Found no image not using the Hugo figure shortcode.
+      v Found no incorrectly embedded tweets.
+      v Found no absolute links to rOpenSci website.
+      * Use `library()` instead of `require()` in `require(blop)`, `require(lala)`.
+
+# ro_lint_md for code no functions
+
+    Code
+      ro_lint_md(path)
+    Message <rlang_message>
+      v Detected no obvious problems with alternative (alt) text.
+      v Found no 'click here' links.
+      v Found no image not using the Hugo figure shortcode.
+      v Found no incorrectly embedded tweets.
+      v Found no absolute links to rOpenSci website.
+      v Found no code style problem.
 
 # ro_lint_md with multiple problems
 
@@ -84,4 +114,5 @@
       v Found no image not using the Hugo figure shortcode.
       v Found no incorrectly embedded tweets.
       * Please replace absolute links with relative links: https://ropensci.org/blog should become /blog.
+      v Found no code style problem.
 
