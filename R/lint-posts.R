@@ -247,3 +247,5 @@ rolint_r_code <- function(post_xml) {
   }
 
 }
+
+globalVariables(".")
