@@ -3,7 +3,8 @@
     Code
       ro_check_urls(path)
     Message <rlang_message>
-      * Possibly broken URLs: https://masalmon.eu/40004, https://masalmon.eu/400040.
+      * Wrong URLs, slash missing: blog.
+      * Possibly broken URLs: https://masalmon.eu/40004, https://masalmon.eu/400040, /4000004/.
       * Replace http with https for: http://masalmon.eu/.
 
 ---
