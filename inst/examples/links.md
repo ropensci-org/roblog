@@ -21,6 +21,8 @@ Save this file under /content/blog/YEAR-MONTH-DAY-slug.md in the local copy of y
 
 [Cool blog](/blog/)
 
+[bad](http://localhost:1313/blog)
+
 [http](http://masalmon.eu/)
 
 [Broken blog](https://masalmon.eu/40004)

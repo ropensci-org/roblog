@@ -29,6 +29,14 @@ ro_check_urls <- function(path = NULL) {
     xml2::xml_find_all("//link") %>%
     xml2::xml_attr("destination")
 
+  full_urls <- urls[!is.na(urltools::domain(urls))]
+  localhost_urls <- full_urls[urltools::domain(full_urls) == "localhost"]
+
+  if ((length(localhost_urls) > 0)) {
+    usethis::ui_todo(glue::glue("Wrong URLs, remove localhost part to create a relative URL: {glue::glue_collapse(localhost_urls, sep = ', ')}."))
+  }
+
+  urls <- urls[!(urls %in% localhost_urls)]
   non_remote_urls <- urls[!grepl("^http", urls)]
   bad_urls <- non_remote_urls[!grepl("^/", non_remote_urls)]
   if ((length(bad_urls) > 0)) {
