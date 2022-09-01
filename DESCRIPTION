@@ -46,6 +46,7 @@ Imports:
     stringr,
     textutils,
     tibble,
+    urltools,
     usethis,
     whoami,
     xml2,
