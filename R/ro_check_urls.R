@@ -36,7 +36,13 @@ ro_check_urls <- function(path = NULL) {
     usethis::ui_todo(glue::glue("Wrong URLs, remove localhost part to create a relative URL: {glue::glue_collapse(localhost_urls, sep = ', ')}."))
   }
 
-  urls <- urls[!(urls %in% localhost_urls)]
+  email_urls <- urls[grepl("@", urls)]
+  bad_email_urls <- email_urls[!grepl("mailto:", email_urls)]
+  if ((length(bad_email_urls) > 0)) {
+    usethis::ui_todo(glue::glue("Wrong email links, add 'mailto:' in front of the emails: {glue::glue_collapse(bad_email_urls, sep = ', ')}."))
+  }
+
+  urls <- urls[!(urls %in% c(localhost_urls, email_urls))]
   non_remote_urls <- urls[!grepl("^http", urls)]
   bad_urls <- non_remote_urls[!grepl("^/", non_remote_urls)]
   if ((length(bad_urls) > 0)) {

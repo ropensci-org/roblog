@@ -32,3 +32,7 @@ Save this file under /content/blog/YEAR-MONTH-DAY-slug.md in the local copy of y
 [Broken local link](/4000004/)
 
 [Missing slash](blog)
+
+[Bad email link](maelle@ropensci.org)
+
+[Good email link](mailto:yabellini@ropensci.org)
