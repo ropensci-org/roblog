@@ -29,11 +29,39 @@ ro_check_urls <- function(path = NULL) {
     xml2::xml_find_all("//link") %>%
     xml2::xml_attr("destination")
 
-  urls <- urls[grepl("http", urls)]
+  full_urls <- urls[!is.na(urltools::domain(urls))]
+  localhost_urls <- full_urls[urltools::domain(full_urls) == "localhost"]
+
+  if ((length(localhost_urls) > 0)) {
+    usethis::ui_todo(glue::glue("Wrong URLs, remove localhost part to create a relative URL: {glue::glue_collapse(localhost_urls, sep = ', ')}."))
+  }
+
+  email_urls <- urls[grepl("@", urls)]
+  bad_email_urls <- email_urls[!grepl("mailto:", email_urls)]
+  if ((length(bad_email_urls) > 0)) {
+    usethis::ui_todo(glue::glue("Wrong email links, add 'mailto:' in front of the emails: {glue::glue_collapse(bad_email_urls, sep = ', ')}."))
+  }
+
+  urls <- urls[!(urls %in% c(localhost_urls, email_urls))]
+  non_remote_urls <- urls[!grepl("^http", urls)]
+  bad_urls <- non_remote_urls[!grepl("^/", non_remote_urls)]
+  if ((length(bad_urls) > 0)) {
+    usethis::ui_todo(glue::glue("Wrong URLs, slash missing: {glue::glue_collapse(bad_urls, sep = ', ')}."))
+  }
+
+  urls <- urls[!(urls %in% bad_urls)]
+
+  ok_url <- function(url) {
+    if (!grepl("^http", url)) {
+      url <- sprintf("https://ropensci.org%s", url)
+    }
+
+    crul::ok(url, verb = "get")
+  }
 
   df <- tibble::tibble(
     url = urls,
-    ok = purrr::map_lgl(urls, crul::ok, verb = "get")
+    ok = purrr::map_lgl(urls, ok_url)
   )
   notok <- df$url[!df$ok]
 
