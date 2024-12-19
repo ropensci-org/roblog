@@ -5,13 +5,19 @@
 #'
 create_newsletter_content <- function() {
   feed <- xml2::read_xml("https://ropensci.org/rbloggers/index.xml")
-  post <- xml2::xml_find_first(feed, "//item/description") %>%
+  posts <- xml2::xml_find_all(feed, "//item")
+  post_xml <- posts[grepl("rOpenSci News Digest",
+    purrr::map_chr(posts, \(x) xml2::xml_text(xml2::xml_find_first(x, "title")))
+    )][[1]]
+
+  post <- post_xml %>%
+    xml2::xml_find_first("description") %>%
     as.character() %>%
     textutils::HTMLdecode() %>%
     xml2::read_html()
 
   # find post URL
-  url <- xml2::xml_find_first(feed, "//guid") %>%
+  url <- xml2::xml_find_first(post_xml, ".//guid") %>%
     xml2::xml_text()
 
   # URLS
