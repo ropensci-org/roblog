@@ -2,28 +2,16 @@ Type: Package
 Package: roblog
 Title: rOpenSci's blog guidance
 Version: 0.1.0
-Authors@R: 
-    c(person(given = "Maëlle",
-             family = "Salmon",
-             role = c("aut", "cre"),
-             email = "maelle.salmon@yahoo.se",
-             comment = c(ORCID = "0000-0002-2815-0399")),
-      person(given = "Stefanie",
-             family = "Butland",
-             role = "aut"),
-      person(given = "rOpenSci",
-             role = "fnd",
-             comment = "https://ropensci.org/"),
-      person(given = "Amanda",
-             family = "Dobbyn",
-             role = "ctb",
-             email = "amanda.e.dobbyn@gmail.com"),
-      person(given = "Christophe",
-             family = "Dervieux",
-             role = "ctb"),
-      person(given = "Romain",
-             family = "LESUR",
-             role = "ctb"))
+Authors@R: c(
+    person("Maëlle", "Salmon", , "maelle.salmon@yahoo.se", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2815-0399")),
+    person("Stefanie", "Butland", role = "aut"),
+    person("rOpenSci", role = "fnd",
+           comment = c("https://ropensci.org/", ROR = "019jywm96")),
+    person("Amanda", "Dobbyn", , "amanda.e.dobbyn@gmail.com", role = "ctb"),
+    person("Christophe", "Dervieux", role = "ctb"),
+    person("Romain", "LESUR", role = "ctb")
+  )
 Description: It provides templates for roweb2 blogging and help
     for a GitHub forking workflow.
 License: MIT + file LICENSE
