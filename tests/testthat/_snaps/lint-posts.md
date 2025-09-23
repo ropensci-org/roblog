@@ -2,7 +2,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -14,9 +14,8 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
-      * Alternative (alt) text missing or too short for:
-        {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" alt = "too short">},
+    Message
+      * Alternative (alt) text missing for:
         {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200">}.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -28,7 +27,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -46,7 +45,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -58,7 +57,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       * Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage
@@ -70,7 +69,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       * Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here
       v Found no image not using the Hugo figure shortcode.
@@ -82,7 +81,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -94,7 +93,7 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
+    Message
       v Detected no obvious problems with alternative (alt) text.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
@@ -106,9 +105,8 @@
 
     Code
       ro_lint_md(path)
-    Message <rlang_message>
-      * Alternative (alt) text missing or too short for:
-        {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200" alt = "too short">},
+    Message
+      * Alternative (alt) text missing for:
         {< figure src = "/img/blog-images/2019-06-04-post-template/name-of-image.png" width = "200">}.
       v Found no 'click here' links.
       v Found no image not using the Hugo figure shortcode.
