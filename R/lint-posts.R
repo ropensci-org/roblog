@@ -41,7 +41,6 @@ ro_lint_md <- function(path = NULL) {
   rolint_alt_shortcode(text)
   rolint_click_here(post_xml)
   rolint_figure_shortcode(post_xml)
-  rolint_tweet(post_xml)
   rolint_absolute_links(post_xml)
   rolint_r_code(post_xml)
 }
@@ -145,24 +144,6 @@ rectangle_shortcode <- function(line) {
     name = name,
     shortcode = line
   )
-}
-
-rolint_tweet <- function(post_xml) {
-  nodes <- xml2::xml_children(post_xml)
-  prob <- xml2::xml_text(
-    nodes[grepl('<blockquote class="twitter-tweet">', xml2::xml_text(nodes))]
-  )
-  status <- stringr::str_extract(prob, "status\\/[0-9]*") %>%
-    stringr::str_remove("status\\/")
-  status <- paste0('{{< tweet "', status, '">}}')
-  if (length(prob) > 0) {
-    usethis::ui_todo(glue::glue(
-      "Use Hugo shortcodes to embed tweets, not Twitter html:\n <code>{glue::glue_collapse(prob, sep = ',\n')}</code>
-       should be {glue::glue_collapse(status, sep = ',\n')}"
-    ))
-  } else {
-    usethis::ui_done("Found no incorrectly embedded tweets.")
-  }
 }
 
 

@@ -13,8 +13,7 @@ tags:
   - community
 # delete the line below
 # if you have no preferred image
-# for Twitter cards
-twitterImg: img/blog-images/2019-06-04-post-template/name-of-image.png
+socialImg: img/blog-images/2019-06-04-post-template/name-of-image.png
 ---
 
  [rOpenSci blog](https://ropensci.org/blog)
