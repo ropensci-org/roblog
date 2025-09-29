@@ -13,8 +13,7 @@ tags:
   - community
 # delete the line below
 # if you have no preferred image
-# for Twitter cards
-twitterImg: img/blog-images/2019-06-04-post-template/name-of-image.png
+socialImg: img/blog-images/2019-06-04-post-template/name-of-image.png
 ---
 
 Save this file under /content/blog/YEAR-MONTH-DAY-slug.md in the local copy of your roweb2 fork.
@@ -23,4 +22,4 @@ Save this file under /content/blog/YEAR-MONTH-DAY-slug.md in the local copy of y
 
 #### Another sentence as heading
 
-[Good link](https://twitter.com), [Click here](https://twitter.com), [here](https://twitter.com).
+[Good link](https://ropensci.org), [Click here](https://ropensci.org), [here](https://ropensci.org).

@@ -2,7 +2,7 @@
 
     Code
       ro_check_urls(path)
-    Message <rlang_message>
+    Message
       * Wrong URLs, remove localhost part to create a relative URL: http://localhost:1313/blog.
       * Wrong email links, add 'mailto:' in front of the emails: maelle@ropensci.org.
       * Wrong URLs, slash missing: blog.
@@ -13,6 +13,6 @@
 
     Code
       ro_check_urls(path)
-    Message <rlang_message>
+    Message
       v URLs ok!
 

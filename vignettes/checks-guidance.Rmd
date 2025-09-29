@@ -20,7 +20,7 @@ Functions to be run on the path to your blog post (rendered, not the Rmd).
 
 `ro_lint_md()` should identify some potential problems and enforce: 
 
-* the use of complete alternative descriptions for image;
+* the use of (possibly empty) alternative descriptions for image;
 
 * the use of Title Case for the title;
 
@@ -32,8 +32,6 @@ Functions to be run on the path to your blog post (rendered, not the Rmd).
 
 * the use of Hugo shortcodes for figures;
 
-* the use of Hugo shortcodes for tweets;
-
 * the use of relative links for links to rOpenSci website.
 
 You need to run `render_one` on the path to the Markdown file. 
@@ -44,16 +42,23 @@ Some Markdown examples and the corresponding messages below.
 ```{r lint, results = "asis", echo = FALSE}
 render_one <- function(path) {
   result <- as.character(suppressMessages(roblog::ro_lint_md(path)))
-  glue::glue_collapse(c(
-    details::details(path, lang = "Markdown", summary = path),"",
-  result), 
-  sep = "\n")
+  glue::glue_collapse(
+    c(
+      details::details(path, lang = "Markdown", summary = path),
+      "",
+      result
+    ),
+    sep = "\n"
+  )
 }
 
 glue::glue_collapse(
-  purrr::map_chr(dir(system.file("examples", package = "roblog"), full.names = TRUE), 
-               render_one),
-  sep = "\n\n----\n\n")
+  purrr::map_chr(
+    dir(system.file("examples", package = "roblog"), full.names = TRUE),
+    render_one
+  ),
+  sep = "\n\n----\n\n"
+)
 
 ```
 
@@ -63,8 +68,7 @@ glue::glue_collapse(
 
 
 ```{r urls}
-path1 <- system.file(file.path("examples", "bad-no-alt.md"),
-                                         package = "roblog")
+path1 <- system.file(file.path("examples", "bad-no-alt.md"), package = "roblog")
 
 roblog::ro_check_urls(path1)
 ```

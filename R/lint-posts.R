@@ -41,10 +41,8 @@ ro_lint_md <- function(path = NULL) {
   rolint_alt_shortcode(text)
   rolint_click_here(post_xml)
   rolint_figure_shortcode(post_xml)
-  rolint_tweet(post_xml)
   rolint_absolute_links(post_xml)
   rolint_r_code(post_xml)
-
 }
 
 rolint_alt_shortcode <- function(text) {
@@ -52,7 +50,9 @@ rolint_alt_shortcode <- function(text) {
     rectangle_shortcodes() -> sc
 
   if (!"shortcode" %in% names(sc)) {
-    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
+    usethis::ui_done(
+      "Detected no obvious problems with alternative (alt) text."
+    )
     return(invisible(NULL))
   }
 
@@ -61,31 +61,25 @@ rolint_alt_shortcode <- function(text) {
     dplyr::group_by(.data$shortcode) -> df
 
   if (nrow(df) == 0) {
-    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
+    usethis::ui_done(
+      "Detected no obvious problems with alternative (alt) text."
+    )
     return(invisible(NULL))
   }
 
   df %>%
-    dplyr::filter(.data$param_name == "alt") %>%
-    # https://stackoverflow.com/questions/8920145/count-the-number-of-all-words-in-a-string
-    dplyr::mutate(
-      param_value = gsub('\"', "", .data$param_value),
-      alt_length = lengths(gregexpr("\\W+", .data$param_value)) + 1
-    ) %>%
-    dplyr::filter(.data$alt_length < 3) -> df1
-
-  df %>%
     dplyr::filter(!any(.data$param_name == "alt")) -> df2
 
-  df3 <- rbind(df1, df2)
-
-
-  if (nrow(df3)) {
+  if (nrow(df2)) {
     usethis::ui_todo(
-      glue::glue("Alternative (alt) text missing or too short for:\n {glue::glue_collapse(unique(df3$shortcode), sep = ',\n ')}.")
+      glue::glue(
+        "Alternative (alt) text missing for:\n {glue::glue_collapse(unique(df2$shortcode), sep = ',\n ')}."
+      )
     )
   } else {
-    usethis::ui_done("Detected no obvious problems with alternative (alt) text.")
+    usethis::ui_done(
+      "Detected no obvious problems with alternative (alt) text."
+    )
   }
 }
 
@@ -100,20 +94,30 @@ rectangle_shortcodes <- function(text) {
 rectangle_shortcode <- function(line) {
   name <- trimws(
     gsub(
-      shortcode_pattern_start(), "",
-      regmatches(line, regexec(paste0(
-        shortcode_pattern_start(),
-        " [a-z]* "
-      ), line))
+      shortcode_pattern_start(),
+      "",
+      regmatches(
+        line,
+        regexec(
+          paste0(
+            shortcode_pattern_start(),
+            " [a-z]* "
+          ),
+          line
+        )
+      )
     )
   )
 
-  params <- gsub(paste0(
-    shortcode_pattern_start(),
-    " [a-z]* "
-  ), "", line)
+  params <- gsub(
+    paste0(
+      shortcode_pattern_start(),
+      " [a-z]* "
+    ),
+    "",
+    line
+  )
   params <- gsub(shortcode_pattern_end(), "", params)
-
 
   if (!grepl("\\=", params)) {
     return(tibble::tibble(
@@ -142,24 +146,6 @@ rectangle_shortcode <- function(line) {
   )
 }
 
-rolint_tweet <- function(post_xml) {
-  nodes <- xml2::xml_children(post_xml)
-  prob <- xml2::xml_text(
-    nodes[grepl('<blockquote class="twitter-tweet">', xml2::xml_text(nodes))]
-  )
-  status <- stringr::str_extract(prob, "status\\/[0-9]*") %>%
-    stringr::str_remove("status\\/")
-  status <- paste0('{{< tweet "', status, '">}}')
-  if (length(prob) > 0) {
-    usethis::ui_todo(glue::glue(
-      "Use Hugo shortcodes to embed tweets, not Twitter html:\n <code>{glue::glue_collapse(prob, sep = ',\n')}</code>
-       should be {glue::glue_collapse(status, sep = ',\n')}"
-    ))
-  } else {
-    usethis::ui_done("Found no incorrectly embedded tweets.")
-  }
-}
-
 
 rolint_absolute_links <- function(post_xml) {
   post_xml %>%
@@ -175,7 +161,9 @@ rolint_absolute_links <- function(post_xml) {
     relative_links <- glue::glue_collapse(relative_links, sep = ", ")
 
     usethis::ui_todo(
-      glue::glue("Please replace absolute links with relative links: {absolute_links} should become {relative_links}.")
+      glue::glue(
+        "Please replace absolute links with relative links: {absolute_links} should become {relative_links}."
+      )
     )
   } else {
     usethis::ui_done("Found no absolute links to rOpenSci website.")
@@ -194,7 +182,8 @@ rolint_figure_shortcode <- function(post_xml) {
   dest <- xml2::xml_attr(images, "destination")
 
   usethis::ui_todo(
-    glue::glue("Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage",
+    glue::glue(
+      "Use Hugo shortcodes for images cf https://blogguide.ropensci.org/technical.html#addimage",
       .open = "[",
       .close = "]"
     )
@@ -207,7 +196,9 @@ rolint_click_here <- function(post_xml) {
     xml2::xml_text() -> link_text
 
   if (any(trimws(tolower(link_text)) %in% c("click here", "here"))) {
-    usethis::ui_todo('Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here')
+    usethis::ui_todo(
+      'Do not use "click here" or "here" as text for links cf https://webaccess.berkeley.edu/ask-pecan/click-here'
+    )
   } else {
     usethis::ui_done("Found no 'click here' links.")
   }
@@ -224,9 +215,9 @@ rolint_r_code <- function(post_xml) {
 
   code <- xml2::xml_text(code_blocks) %>%
     parse(
-    text = .,
-    keep.source = TRUE
-  ) %>%
+      text = .,
+      keep.source = TRUE
+    ) %>%
     xmlparsedata::xml_parse_data(pretty = TRUE) %>%
     xml2::read_xml()
 
@@ -237,7 +228,9 @@ rolint_r_code <- function(post_xml) {
     usethis::ui_done("Found no code style problem.")
   } else {
     require_calls <- functions[function_names == "require"]
-    require_calls_text <- xml2::xml_text(xml2::xml_parent(xml2::xml_parent(require_calls)))
+    require_calls_text <- xml2::xml_text(xml2::xml_parent(xml2::xml_parent(
+      require_calls
+    )))
     usethis::ui_todo(
       sprintf(
         "Use `library()` instead of `require()` in %s.",
@@ -245,7 +238,6 @@ rolint_r_code <- function(post_xml) {
       )
     )
   }
-
 }
 
 globalVariables(".")
